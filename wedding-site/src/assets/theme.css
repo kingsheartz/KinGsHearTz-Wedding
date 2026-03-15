@@ -1,0 +1,38 @@
+body{
+/* background: linear-gradient(135deg,#fff0f5,#ffe4e6); */
+font-family: "Poppins", sans-serif;
+}
+
+.section{
+padding:100px 20px;
+}
+
+.title{
+font-family:"Playfair Display",serif;
+font-size:42px;
+color:#be123c;
+}
+
+.card{
+background:white;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+padding:30px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.btn-romantic{
+background:#f43f5e;
+color:white;
+padding:12px 30px;
+border-radius:30px;
+transition:0.3s;
+}
+
+.btn-romantic:hover{
+background:#be123c;
+}
