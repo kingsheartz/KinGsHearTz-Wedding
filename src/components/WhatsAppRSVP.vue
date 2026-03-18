@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const phone="919876543210"
+const phone="918113990368"
 
 const openWA=()=>{
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const events = [
   { year: "2018", title: "When We Met", text: "Two paths crossed and a beautiful story began." },
-  { year: "2020", title: "First Trip", text: "We discovered new places and fell deeper in love." },
+  { year: "2021", title: "First Trip", text: "We discovered new places and fell deeper in love." },
   { year: "2026", title: "Engagement", text: "A promise made, surrounded by our loved ones." },
   { year: "2027", title: "Wedding", text: "The day we become one, forever." }
 ];

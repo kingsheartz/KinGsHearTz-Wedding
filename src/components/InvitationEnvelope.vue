@@ -98,7 +98,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
           <p class="text-xs tracking-[0.4em] uppercase text-rose-400 mb-2">You are invited</p>
           <p class="text-rose-600/90 text-sm mb-4">to celebrate the wedding of</p>
           <h1 class="font-romantic text-3xl sm:text-4xl text-rose-700 mb-2">Govind & Krishnendu</h1>
-          <p class="text-rose-500/80 text-sm mb-8">25 March 2027 · Kochi</p>
+          <p class="text-rose-500/80 text-sm mb-8">09 January 2027 · Thrissur</p>
 
           <button
             type="button"

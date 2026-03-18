@@ -21,7 +21,7 @@ const stories = [
   <section
     v-for="story in stories"
     :key="story.id"
-    class="parallax flex items-center justify-center min-h-screen py-20"
+    class="parallax flex items-center justify-center min-w-12.5 py-20"
     :style="{
       background: story.bg,
       backgroundAttachment: 'fixed',

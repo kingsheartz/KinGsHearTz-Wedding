@@ -2,7 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from "vue"
 import launchFireworks from "./Fireworks"
 
-const weddingDate = new Date("2027-01-09T10:30:00")
+const weddingDate = new Date("2027-01-09T00:00:00")
 
 const days = ref("00")
 const hours = ref("00")

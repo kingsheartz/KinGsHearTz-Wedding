@@ -33,7 +33,7 @@
 
         <div class="text-xs sm:text-sm text-rose-100/80 flex items-center gap-2">
           <span class="inline-block h-[1px] w-8 bg-rose-200/60"></span>
-          <span>Wedding on 25 March 2027 • Kochi</span>
+          <span>Wedding on 09 January 2027 • Kochi</span>
           <span class="inline-block h-[1px] w-8 bg-rose-200/60"></span>
         </div>
       </div>
