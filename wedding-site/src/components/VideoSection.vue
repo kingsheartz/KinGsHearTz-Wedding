@@ -1,10 +1,10 @@
 <template>
   <section class="py-20 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-      <h2 class="text-3xl sm:text-4xl font-romantic text-rose-700 mb-4">
+      <h2 class="text-3xl sm:text-4xl font-romantic text-rose-700 mb-4 text-center">
         Our Love Story Film
       </h2>
-      <p class="text-gray-600 mb-10 max-w-2xl mx-auto">
+      <p class="text-gray-600 mb-10 mx-auto">
         A glimpse into our journey, the laughter we shared, and the moments that led us to this
         beautiful day.
       </p>

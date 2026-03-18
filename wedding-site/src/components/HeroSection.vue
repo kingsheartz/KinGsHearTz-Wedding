@@ -6,8 +6,8 @@
     <!-- Overlay -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-rose-900/80"></div>
 
-    <!-- Content -->
-    <div class="relative z-10 px-4 sm:px-6">
+    <!-- Hero Content -->
+    <div class="relative z-10 px-4 sm:px-6 pt-20 sm:pt-24">
       <p class="uppercase tracking-[0.3em] text-xs sm:text-sm text-rose-200/80 mb-4 animate-fade-slow">
         The Wedding Of
       </p>
@@ -18,7 +18,7 @@
         Govind <span class="text-rose-300">&amp;</span> Krishnendu
       </h1>
 
-      <p class="mt-6 text-base sm:text-lg text-rose-50/90 max-w-xl mx-auto animate-fade-up delay-150">
+      <p class="mt-6 text-base sm:text-lg text-rose-50/90 mx-auto animate-fade-up delay-150">
         Together with their families, they joyfully invite you to celebrate the beginning of their
         forever.
       </p>

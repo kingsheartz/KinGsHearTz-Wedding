@@ -8,12 +8,12 @@ const events = [
 </script>
 
 <template>
-  <section class="py-20 bg-rose-50/60">
+  <section id="story" class="py-20 bg-rose-50/60">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       <h2 class="text-3xl sm:text-4xl font-romantic text-center text-rose-700 mb-4">
         Our Journey Together
       </h2>
-      <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+      <p class="text-center text-gray-600 mx-auto mb-12">
         Every moment brought us closer to this day. Here are a few milestones from our love story.
       </p>
 

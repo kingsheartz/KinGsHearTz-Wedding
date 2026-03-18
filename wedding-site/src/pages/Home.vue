@@ -1,8 +1,10 @@
 <script setup lang="ts">
 
+import SiteHeader from "../components/SiteHeader.vue"
 import HeroSection from "../components/HeroSection.vue"
 import CountdownTimer from "../components/CountdownTimer.vue"
 import StoryTimeline from "../components/StoryTimeline.vue"
+import StoryParallax from "../components/StoryParallax.vue"
 import EventDetails from "../components/EventDetails.vue"
 import FloatingPetals from "../components/FloatingPetals.vue"
 import GallerySlider from "../components/GallerySlider.vue"
@@ -16,11 +18,15 @@ import BackgroundMusic from "../components/BackgroundMusic.vue"
 <template>
   <BackgroundMusic />
 
+  <SiteHeader />
+
   <HeroSection />
 
   <CountdownTimer />
 
   <StoryTimeline />
+
+  <StoryParallax />
 
   <VideoSection />
 
