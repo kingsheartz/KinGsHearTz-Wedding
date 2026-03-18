@@ -8,9 +8,10 @@ const exiting = ref(false)
 function openInvite() {
   if (opened.value) return
   opened.value = true
+  spawnPetals()
   setTimeout(() => {
     letterVisible.value = true
-  }, 600)
+  }, 750)
 }
 
 function enterWedding() {
@@ -20,125 +21,594 @@ function enterWedding() {
   }, 800)
 }
 
+function spawnPetals() {
+  const stage = document.getElementById("inv-stage")
+  if (!stage) return
+  const colors = ["#d4a837", "#c8855a", "#e8c878", "rgba(212,168,55,0.6)", "#f0d08a", "#c9956a"]
+  for (let i = 0; i < 26; i++) {
+    const p = document.createElement("div")
+    p.className = "inv-petal"
+    const size = 4 + Math.random() * 9
+    p.style.cssText = `
+      position:absolute;
+      border-radius:50% 0 50% 0;
+      pointer-events:none;
+      z-index:0;
+      width:${size}px;height:${size}px;
+      left:${Math.random() * 100}%;
+      top:${-10 - Math.random() * 40}px;
+      background:${colors[Math.floor(Math.random() * colors.length)]};
+      animation:inv-fall ${2.5 + Math.random() * 2}s linear ${Math.random() * 0.8}s forwards;
+    `
+    stage.appendChild(p)
+    setTimeout(() => p.remove(), 5000)
+  }
+}
+
 const emit = defineEmits<{ (e: "enter"): void }>()
 </script>
 
 <template>
   <div
-    class="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden transition-opacity duration-700"
-    :class="exiting ? 'opacity-0 pointer-events-none' : ''"
-    style="background: linear-gradient(165deg, #fef7f4 0%, #fce7f3 40%, #fbcfe8 100%);"
+    id="inv-stage"
+    class="inv-stage"
+    :class="exiting ? 'inv-exiting' : ''"
   >
-    <!-- Subtle pattern overlay -->
-    <div class="pointer-events-none absolute inset-0 opacity-[0.04] pattern-diamond" />
+    <!-- Background dot grid -->
+    <div class="inv-dotgrid" />
+    <!-- Radial glow -->
+    <div class="inv-glow" />
 
-    <!-- Hint text (before open) -->
-    <p
-      v-if="!opened"
-      class="absolute top-[18%] z-10 text-sm tracking-[0.35em] uppercase text-rose-400/90 transition-opacity duration-300"
-    >
-      Click the envelope to open
+    <!-- Hint -->
+    <p v-if="!opened" class="inv-hint">
+      <span class="inv-hint-line" />
+      Click to open
+      <span class="inv-hint-line" />
     </p>
 
-    <!-- Envelope + letter container -->
-    <div class="relative flex items-center justify-center min-h-[420px] w-full max-w-lg px-6">
-      <!-- Envelope body -->
+    <!-- Envelope + card area -->
+    <div class="inv-center">
+
+      <!-- ── ENVELOPE ── -->
       <div
-        class="relative cursor-pointer select-none transition-transform duration-500 hover:scale-[1.02]"
-        :class="opened ? 'scale-95 opacity-0 pointer-events-none' : ''"
+        class="inv-env-wrap"
+        :class="{ 'inv-env-opened': opened }"
         @click="openInvite"
       >
-        <div
-          class="envelope-body relative w-[320px] h-[200px] rounded-sm shadow-2xl"
-          style="background: linear-gradient(145deg, #e11d48 0%, #be123c 50%, #9f1239 100%); box-shadow: 0 25px 50px -12px rgba(190, 18, 60, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);"
-        >
-          <!-- Envelope flap (opens up) -->
-          <div
-            class="envelope-flap absolute inset-0 rounded-sm transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
-            :class="opened ? 'flap-open' : ''"
-            style="
-              background: linear-gradient(160deg, #f43f5e 0%, #e11d48 40%, #be123c 100%);
-              box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
-              transform-origin: top center;
-           "
-          >
-            <div
-              class="absolute bottom-0 left-0 right-0 h-1/2 rounded-b-sm opacity-90"
-              style="background: linear-gradient(to top, #9f1239, transparent);"
-            />
-          </div>
-
-          <!-- Envelope inner (visible when flap opens) -->
-          <div
-            class="absolute inset-2 rounded-sm opacity-95"
-            style="background: linear-gradient(180deg, #fef2f2 0%, #fce7f3 100%);"
-          />
-
-          <!-- Seal -->
-          <div
-            v-if="!opened"
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center text-white font-semibold text-lg tracking-wider shadow-lg border-2 border-white/40"
-            style="background: linear-gradient(145deg, #f472b6, #ec4899);"
-          >
-            G & K
+        <div class="inv-env-body">
+          <!-- Side folds -->
+          <div class="inv-fold-left" />
+          <div class="inv-fold-right" />
+          <!-- Bottom fold -->
+          <div class="inv-fold-bottom" />
+          <!-- Flap -->
+          <div class="inv-flap" :class="{ 'inv-flap-open': opened }" />
+          <!-- Wax seal -->
+          <div class="inv-seal" :class="{ 'inv-seal-gone': opened }">
+            <div class="inv-seal-ring">
+              <span class="inv-seal-initials">G</span>
+              <span class="inv-seal-amp">&amp;</span>
+              <span class="inv-seal-initials">K</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Letter (slides up after open) -->
+      <!-- ── INVITATION CARD ── -->
       <div
-        class="absolute inset-0 flex items-center justify-center px-6"
-        :class="letterVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'"
-        style="transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);"
+        class="inv-card-wrap"
+        :class="{ 'inv-card-visible': letterVisible }"
       >
-        <div
-          class="w-full max-w-md rounded-2xl px-8 py-10 text-center shadow-2xl border border-rose-100/80"
-          style="background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 50%, #fef7f4 100%); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15), 0 0 0 1px rgba(251, 113, 133, 0.1);"
-        >
-          <p class="text-xs tracking-[0.4em] uppercase text-rose-400 mb-2">You are invited</p>
-          <p class="text-rose-600/90 text-sm mb-4">to celebrate the wedding of</p>
-          <h1 class="font-romantic text-3xl sm:text-4xl text-rose-700 mb-2">Govind & Krishnendu</h1>
-          <p class="text-rose-500/80 text-sm mb-8">09 January 2027 · Thrissur</p>
+        <div class="inv-card">
+          <!-- Corner ornaments via pseudo, inner frame -->
+          <div class="inv-card-inner">
 
-          <button
-            type="button"
-            class="rounded-full px-8 py-3 text-sm font-medium text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-100"
-            style="background: linear-gradient(145deg, #e11d48, #be123c); box-shadow: 0 4px 14px rgba(190, 18, 60, 0.45);"
-            @click="enterWedding"
-          >
-            Enter our wedding
-          </button>
+            <div class="inv-divider">
+              <span class="inv-divider-line" />
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 0.5L7.06 3.9H10.6L7.77 5.98L8.83 9.38L6 7.3L3.17 9.38L4.23 5.98L1.4 3.9H4.94Z" fill="rgba(180,130,60,0.75)"/>
+              </svg>
+              <span class="inv-divider-line" />
+            </div>
+
+            <!-- Monogram -->
+            <div class="inv-monogram">
+              <div class="inv-monogram-ring">
+                <div class="inv-monogram-inner">
+                  <span class="inv-mono-letters">G K</span>
+                  <span class="inv-mono-amp">&amp;</span>
+                </div>
+              </div>
+            </div>
+
+            <span class="inv-label-top">You are cordially invited</span>
+            <p class="inv-label-sub">to celebrate the wedding of</p>
+
+            <h1 class="inv-names"><em>Govind</em> &amp; <em>Krishnendu</em></h1>
+            <p class="inv-date">09 · January · 2027 &nbsp;·&nbsp; Thrissur</p>
+
+            <div class="inv-divider inv-divider-sm">
+              <span class="inv-divider-line inv-divider-short" />
+              <svg width="8" height="8" viewBox="0 0 8 8">
+                <circle cx="4" cy="4" r="2" fill="rgba(180,130,60,0.55)"/>
+              </svg>
+              <span class="inv-divider-line inv-divider-short" />
+            </div>
+
+            <button class="inv-btn" type="button" @click="enterWedding">
+              Enter our Wedding
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Decorative line -->
-    <div
-      class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3 text-rose-300/70 text-xs tracking-widest"
-    >
-      <span class="w-12 h-px bg-rose-200/60 rounded" />
-      <span>With love</span>
-      <span class="w-12 h-px bg-rose-200/60 rounded" />
+    <!-- Bottom "With love" line -->
+    <div class="inv-footer">
+      <span class="inv-footer-line" />
+      <span class="inv-footer-text">With love</span>
+      <span class="inv-footer-line" />
     </div>
   </div>
 </template>
 
 <style scoped>
-.pattern-diamond {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='%2393126f' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap");
+
+/* ─────────────────────────────────────────
+   STAGE
+───────────────────────────────────────── */
+.inv-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #1a0a0f;
+  font-family: "Cormorant Garamond", serif;
+  transition: opacity 0.8s ease;
 }
 
-.envelope-body {
-  perspective: 1200px;
+.inv-exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* dot grid texture */
+.inv-dotgrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(180, 130, 60, 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ambient glow */
+.inv-glow {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 110, 30, 0.13) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────
+   HINT
+───────────────────────────────────────── */
+.inv-hint {
+  position: absolute;
+  top: 18%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Cinzel", serif;
+  font-size: 9px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(180, 130, 60, 0.55);
+  z-index: 10;
+  animation: inv-breathe 3s ease-in-out infinite;
+}
+
+.inv-hint-line {
+  display: inline-block;
+  width: 32px;
+  height: 0.5px;
+  background: rgba(180, 130, 60, 0.4);
+}
+
+@keyframes inv-breathe {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+/* ─────────────────────────────────────────
+   CENTER CONTAINER
+───────────────────────────────────────── */
+.inv-center {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  width: 100%;
+  max-width: 480px;
+  padding: 0 24px;
+}
+
+/* ─────────────────────────────────────────
+   ENVELOPE
+───────────────────────────────────────── */
+.inv-env-wrap {
+  position: relative;
+  width: 340px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  flex-shrink: 0;
+}
+
+.inv-env-wrap:hover {
+  transform: scale(1.02);
+}
+
+.inv-env-opened {
+  pointer-events: none;
+  animation: inv-env-exit 0.5s ease 0.9s forwards;
+}
+
+@keyframes inv-env-exit {
+  to {
+    opacity: 0;
+    transform: scale(0.88) translateY(12px);
+    visibility: hidden;
+  }
+}
+
+.inv-env-body {
+  position: relative;
+  width: 340px;
+  height: 210px;
+  background: #2d1a22;
+  border: 1px solid rgba(180, 130, 60, 0.35);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(180, 130, 60, 0.18);
+}
+
+/* side folds */
+.inv-fold-left {
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%; height: 100%;
+  background: #281520;
+  clip-path: polygon(0 0, 100% 40%, 0 100%);
+  z-index: 2;
+}
+.inv-fold-right {
+  position: absolute;
+  top: 0; right: 0;
+  width: 50%; height: 100%;
+  background: #22111c;
+  clip-path: polygon(100% 0, 0 40%, 100% 100%);
+  z-index: 2;
+}
+
+/* bottom fold */
+.inv-fold-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 105px;
+  background: linear-gradient(to top, #180e14, #2d1a22);
+  clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+  z-index: 1;
+}
+
+/* flap */
+.inv-flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(170deg, #3a2030 0%, #2d1a22 100%);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  z-index: 3;
+  transform-origin: top center;
   transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 0.5px solid rgba(180, 130, 60, 0.25);
 }
 
-.envelope-flap {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+.inv-flap-open {
+  transform: rotateX(-172deg);
 }
 
-.flap-open {
-  transform: rotateX(-180deg);
+/* wax seal */
+.inv-seal {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.inv-seal-gone {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+.inv-seal-ring {
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #d4a837, #7a5a18);
+  border: 2px solid rgba(255, 215, 100, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  box-shadow:
+    0 4px 22px rgba(180, 130, 40, 0.45),
+    inset 0 1px 0 rgba(255, 215, 100, 0.25);
+  position: relative;
+}
+
+.inv-seal-ring::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(255, 215, 100, 0.4);
+}
+
+.inv-seal-initials {
+  font-family: "Cinzel", serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a0a0f;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.inv-seal-amp {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(26, 10, 15, 0.65);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+/* ─────────────────────────────────────────
+   PETALS (global because injected via JS)
+───────────────────────────────────────── */
+/* using :global for dynamically appended elements */
+
+/* ─────────────────────────────────────────
+   INVITATION CARD
+───────────────────────────────────────── */
+.inv-card-wrap {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -40%) translateY(40px);
+  opacity: 0;
+  transition:
+    opacity 0.75s ease 0.65s,
+    transform 0.9s cubic-bezier(0.34, 1.25, 0.64, 1) 0.6s;
+  pointer-events: none;
+  z-index: 20;
+  width: 310px;
+}
+
+.inv-card-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+  pointer-events: all;
+}
+
+.inv-card {
+  background: #f9f3e8;
+  border: 1px solid rgba(180, 130, 60, 0.28);
+  border-radius: 3px;
+  padding: 36px 32px 32px;
+  text-align: center;
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.72),
+    0 0 0 5px rgba(180, 130, 60, 0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+/* gold corner ornaments */
+.inv-card::before,
+.inv-card::after {
+  content: "";
+  position: absolute;
+  width: 44px; height: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 4 L4 18 M4 4 L18 4' stroke='%23b08020' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='4' cy='4' r='1.5' fill='%23b08020'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.inv-card::before { top: 8px; left: 8px; }
+.inv-card::after  { bottom: 8px; right: 8px; transform: rotate(180deg); }
+
+.inv-card-inner {
+  border: 0.5px solid rgba(180, 130, 60, 0.3);
+  border-radius: 2px;
+  padding: 26px 18px 22px;
+}
+
+/* dividers */
+.inv-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.inv-divider-sm {
+  margin-bottom: 18px;
+  margin-top: 0;
+}
+.inv-divider-line {
+  width: 44px; height: 0.5px;
+  background: linear-gradient(to right, transparent, rgba(180, 130, 60, 0.65));
+}
+.inv-divider-line + svg ~ .inv-divider-line,
+.inv-divider-line:last-child {
+  transform: scaleX(-1);
+}
+.inv-divider-short {
+  width: 26px;
+}
+
+/* monogram */
+.inv-monogram {
+  margin: 0 auto 18px;
+  width: 88px; height: 88px;
+}
+.inv-monogram-ring {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #d4a837, #7a5a18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 4px 22px rgba(180, 130, 40, 0.38),
+    0 0 0 3px rgba(180, 130, 60, 0.14),
+    0 0 0 6px rgba(180, 130, 60, 0.06);
+  position: relative;
+}
+.inv-monogram-ring::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(255, 215, 100, 0.45);
+}
+.inv-monogram-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+.inv-mono-letters {
+  font-family: "Cinzel", serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a0a0f;
+  letter-spacing: 0.06em;
+}
+.inv-mono-amp {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(26, 10, 15, 0.6);
+  margin-top: 1px;
+}
+
+/* text labels */
+.inv-label-top {
+  display: block;
+  font-family: "Cinzel", serif;
+  font-size: 8.5px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(180, 130, 60, 0.8);
+  margin-bottom: 7px;
+}
+.inv-label-sub {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 13.5px;
+  color: #6b4a28;
+  margin-bottom: 11px;
+  letter-spacing: 0.03em;
+}
+.inv-names {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 27px;
+  font-weight: 300;
+  color: #2d1a10;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+.inv-names em { font-style: italic; }
+
+.inv-date {
+  font-family: "Cinzel", serif;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: rgba(180, 130, 60, 0.82);
+  margin-bottom: 20px;
+}
+
+/* CTA button */
+.inv-btn {
+  background: linear-gradient(145deg, #d4a837, #8b6818);
+  border: none;
+  border-radius: 40px;
+  padding: 11px 30px;
+  font-family: "Cinzel", serif;
+  font-size: 9.5px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #1a0a0f;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(180, 130, 40, 0.42);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.inv-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 28px rgba(180, 130, 40, 0.58);
+}
+.inv-btn:active {
+  transform: scale(0.98);
+}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.inv-footer {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+.inv-footer-line {
+  display: inline-block;
+  width: 40px; height: 0.5px;
+  background: rgba(180, 130, 60, 0.3);
+}
+.inv-footer-text {
+  font-family: "Cinzel", serif;
+  font-size: 9px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(180, 130, 60, 0.45);
+}
+</style>
+
+<!-- Petal keyframe must be global (not scoped) because petals are injected into DOM -->
+<style>
+@keyframes inv-fall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 0.9; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
 </style>
