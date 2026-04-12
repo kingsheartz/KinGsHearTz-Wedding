@@ -531,6 +531,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
   letter-spacing: 0.45em;
   text-transform: uppercase;
   color: rgba(180, 130, 60, 0.8);
+  font-weight: 300;
   margin-bottom: 7px;
 }
 .inv-label-sub {
@@ -557,6 +558,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
   font-size: 9.5px;
   letter-spacing: 0.22em;
   color: rgba(180, 130, 60, 0.82);
+  font-weight: 300;
   margin-bottom: 20px;
 }
 
