@@ -15,17 +15,17 @@ const locations = [
     id: "kalyanam",
     pill: "Kalyanam",
     title: "Wedding Venue",
-    place: "Sree Convention Center",
+    place: "MSC convention centre, Melur",
     embed:
-      "https://www.google.com/maps?q=Sree+Convention+Center+Kozhikode+Kerala&output=embed&z=15",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22855.745463408264!2d76.36170676566762!3d10.314500158447249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080196c8164d5b%3A0x1b77b47948227284!2sMSC%20convention%20centre!5e0!3m2!1sen!2sin!4v1776109254653!5m2!1sen!2sin",
   },
   {
     id: "vivaahasalkkaram",
     pill: "Vivaahasalkkaram",
     title: "Wedding Reception",
-    place: "Evening celebration — venue TBC",
+    place: "Anugraha Parish Hall, Mannampetta",
     embed:
-      "https://www.google.com/maps?q=Melur+Kerala&output=embed&z=13",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1961.9560002467504!2d76.2914633162632!3d10.428557710022123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7fa15e679ea77%3A0xf4d94274c241b16!2sAnugraha%20Parish%20Hall%20Mannampetta!5e0!3m2!1sen!2sin!4v1776109361153!5m2!1sen!2sin",
   },
 ] as const
 
