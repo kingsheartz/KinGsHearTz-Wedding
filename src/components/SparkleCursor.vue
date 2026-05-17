@@ -2,22 +2,22 @@
 
 import { onMounted } from "vue"
 
-onMounted(()=>{
+onMounted(() => {
 
-document.addEventListener("mousemove",(e)=>{
+	document.addEventListener("mousemove", (e) => {
 
-const sparkle=document.createElement("div")
+		const sparkle = document.createElement("div")
 
-sparkle.className="sparkle"
+		sparkle.className = "sparkle"
 
-sparkle.style.left=e.pageX+"px"
-sparkle.style.top=e.pageY+"px"
+		sparkle.style.left = e.pageX + "px"
+		sparkle.style.top = e.pageY + "px"
 
-document.body.appendChild(sparkle)
+		document.body.appendChild(sparkle)
 
-setTimeout(()=>sparkle.remove(),600)
+		setTimeout(() => sparkle.remove(), 600)
 
-})
+	})
 
 })
 
@@ -26,24 +26,29 @@ setTimeout(()=>sparkle.remove(),600)
 <template></template>
 
 <style>
+.sparkle {
 
-.sparkle{
-
-position:absolute;
-width:6px;
-height:6px;
-background:gold;
-border-radius:50%;
-pointer-events:none;
-animation:sparkle 0.6s linear;
-
-}
-
-@keyframes sparkle{
-
-0%{transform:scale(1);opacity:1;}
-100%{transform:scale(3);opacity:0;}
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	background: gold;
+	border-radius: 50%;
+	pointer-events: none;
+	animation: sparkle 0.6s linear;
 
 }
 
+@keyframes sparkle {
+
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	100% {
+		transform: scale(3);
+		opacity: 0;
+	}
+
+}
 </style>

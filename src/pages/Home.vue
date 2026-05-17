@@ -16,29 +16,29 @@ import BackgroundMusic from "../components/BackgroundMusic.vue"
 </script>
 
 <template>
-  <BackgroundMusic />
+	<BackgroundMusic />
 
-  <SiteHeader />
+	<SiteHeader />
 
-  <HeroSection />
+	<HeroSection />
 
-  <CountdownTimer />
+	<CountdownTimer />
 
-  <StoryTimeline />
+	<StoryTimeline />
 
-  <StoryParallax />
+	<StoryParallax />
 
-  <VideoSection />
+	<VideoSection />
 
-  <GallerySlider />
+	<GallerySlider />
 
-  <EventDetails />
+	<EventDetails />
 
-	<FloatingPetals/>
+	<FloatingPetals />
 
-  <GoogleMapVenue />
+	<GoogleMapVenue />
 
-  <RSVPForm />
+	<RSVPForm />
 
-  <WhatsAppRSVP />
+	<WhatsAppRSVP />
 </template>
