@@ -184,7 +184,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	background: #1a0004;
+	background: #1a0a0f;
 	font-family: "Cormorant Garamond", serif;
 	transition: opacity 0.8s ease;
 }
@@ -199,7 +199,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	position: absolute;
 	inset: 0;
 	pointer-events: none;
-	background-image: radial-gradient(circle, rgba(218, 52, 82, 0.06) 1px, transparent 1px);
+	background-image: radial-gradient(circle, rgba(180, 130, 60, 0.07) 1px, transparent 1px);
 	background-size: 22px 22px;
 }
 
@@ -209,7 +209,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	width: 480px;
 	height: 480px;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(165, 18, 82, 0.12) 0%, transparent 68%);
+	background: radial-gradient(circle, rgba(180, 110, 30, 0.13) 0%, transparent 70%);
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -229,7 +229,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-size: 9px;
 	letter-spacing: 0.45em;
 	text-transform: uppercase;
-	color: rgba(198, 95, 112, 1);
+	color: rgba(180, 130, 60, 0.55);
 	z-index: 10;
 	animation: inv-breathe 3s ease-in-out infinite;
 }
@@ -238,7 +238,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	display: inline-block;
 	width: 32px;
 	height: 0.5px;
-	background: rgba(218, 52, 82, 0.35);
+	background: rgba(180, 130, 60, 0.4);
 }
 
 @keyframes inv-breathe {
@@ -299,6 +299,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	position: relative;
 	width: 340px;
 	height: 210px;
+	border: 1px solid rgba(180, 130, 60, 0.35);
 	border-radius: 3px;
 	overflow: hidden;
 	box-shadow:
@@ -352,15 +353,15 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	width: 68px;
 	height: 68px;
 	border-radius: 50%;
-	background: radial-gradient(circle at 38% 32%, #8a0f32, #000000);
-	border: 2px solid rgba(254, 205, 211, 0.55);
+	background: radial-gradient(circle at 38% 32%, #d4a837, #7a5a18);
+	border: 2px solid rgba(255, 215, 100, 0.35);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 1px;
 	box-shadow:
-		0 4px 22px rgba(165, 18, 82, 0.5),
-		inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		0 4px 22px rgba(180, 130, 40, 0.45),
+		inset 0 1px 0 rgba(255, 215, 100, 0.25);
 	position: relative;
 }
 
@@ -369,17 +370,16 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	position: absolute;
 	inset: 5px;
 	border-radius: 50%;
-	border: 0.5px solid rgba(255, 255, 255, 0.35);
+	border: 0.5px solid rgba(255, 215, 100, 0.4);
 }
 
 .inv-seal-initials {
 	font-family: "Cinzel", serif;
 	font-size: 15px;
 	font-weight: 600;
-	color: #fff7ed;
-	letter-spacing: 0.06em;
+	color: #1a0a0f;
+	letter-spacing: 0;
 	line-height: 1;
-	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 
 .inv-seal-amp {
@@ -387,6 +387,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-style: italic;
 	font-size: 11px;
 	font-weight: 300;
+	color: rgba(26, 10, 15, 0.65);
 	line-height: 1;
 	margin-top: 2px;
 }
@@ -634,7 +635,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	display: inline-block;
 	width: 40px;
 	height: 0.5px;
-	background: rgba(218, 52, 82, 0.28);
+	background: rgba(180, 130, 60, 0.4);
 }
 
 .inv-footer-text {
@@ -642,7 +643,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-size: 9px;
 	letter-spacing: 0.45em;
 	text-transform: uppercase;
-	color: rgba(161, 161, 170, 0.55);
+	color: rgba(180, 130, 60, 0.55);
 }
 </style>
 
