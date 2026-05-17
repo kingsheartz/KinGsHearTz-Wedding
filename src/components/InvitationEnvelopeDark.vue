@@ -184,7 +184,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	background: #1a0a0f;
+	background: #1a0004;
 	font-family: "Cormorant Garamond", serif;
 	transition: opacity 0.8s ease;
 }
@@ -199,7 +199,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	position: absolute;
 	inset: 0;
 	pointer-events: none;
-	background-image: radial-gradient(circle, rgba(180, 130, 60, 0.07) 1px, transparent 1px);
+	background-image: radial-gradient(circle, rgba(218, 52, 82, 0.06) 1px, transparent 1px);
 	background-size: 22px 22px;
 }
 
@@ -209,7 +209,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	width: 480px;
 	height: 480px;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(180, 110, 30, 0.13) 0%, transparent 70%);
+	background: radial-gradient(circle, rgba(165, 18, 82, 0.12) 0%, transparent 68%);
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -229,7 +229,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-size: 9px;
 	letter-spacing: 0.45em;
 	text-transform: uppercase;
-	color: rgba(180, 130, 60, 0.55);
+	color: rgba(198, 95, 112, 1);
 	z-index: 10;
 	animation: inv-breathe 3s ease-in-out infinite;
 }
@@ -238,7 +238,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	display: inline-block;
 	width: 32px;
 	height: 0.5px;
-	background: rgba(180, 130, 60, 0.4);
+	background: rgba(218, 52, 82, 0.35);
 }
 
 @keyframes inv-breathe {
@@ -299,7 +299,6 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	position: relative;
 	width: 340px;
 	height: 210px;
-	border: 1px solid rgba(180, 130, 60, 0.35);
 	border-radius: 3px;
 	overflow: hidden;
 	box-shadow:
@@ -353,15 +352,15 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	width: 68px;
 	height: 68px;
 	border-radius: 50%;
-	background: radial-gradient(circle at 38% 32%, #d4a837, #7a5a18);
-	border: 2px solid rgba(255, 215, 100, 0.35);
+	background: radial-gradient(circle at 38% 32%, #8a0f32, #000000);
+	border: 2px solid rgba(254, 205, 211, 0.55);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 1px;
 	box-shadow:
-		0 4px 22px rgba(180, 130, 40, 0.45),
-		inset 0 1px 0 rgba(255, 215, 100, 0.25);
+		0 4px 22px rgba(165, 18, 82, 0.5),
+		inset 0 1px 0 rgba(255, 255, 255, 0.2);
 	position: relative;
 }
 
@@ -370,16 +369,17 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	position: absolute;
 	inset: 5px;
 	border-radius: 50%;
-	border: 0.5px solid rgba(255, 215, 100, 0.4);
+	border: 0.5px solid rgba(255, 255, 255, 0.35);
 }
 
 .inv-seal-initials {
 	font-family: "Cinzel", serif;
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: 600;
-	color: #1a0a0f;
-	letter-spacing: 0;
+	color: #fff7ed;
+	letter-spacing: 0.06em;
 	line-height: 1;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 
 .inv-seal-amp {
@@ -387,7 +387,6 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-style: italic;
 	font-size: 11px;
 	font-weight: 300;
-	color: rgba(26, 10, 15, 0.65);
 	line-height: 1;
 	margin-top: 2px;
 }
@@ -422,25 +421,25 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 
 .inv-card {
 	background: #f9f3e8;
-	border: 1px solid rgba(180, 130, 60, 0.28);
+	border: 1px solid rgba(218, 52, 82, 0.22);
 	border-radius: 3px;
 	padding: 36px 32px 32px;
 	text-align: center;
 	box-shadow:
-		0 40px 100px rgba(0, 0, 0, 0.72),
-		0 0 0 5px rgba(180, 130, 60, 0.07);
+		0 40px 100px rgba(0, 0, 0, 0.65),
+		0 0 0 1px rgba(225, 95, 115, 0.08);
 	position: relative;
 	overflow: hidden;
 }
 
-/* gold corner ornaments */
+/* corner ornaments */
 .inv-card::before,
 .inv-card::after {
 	content: "";
 	position: absolute;
 	width: 44px;
 	height: 44px;
-	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 4 L4 18 M4 4 L18 4' stroke='%23b08020' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='4' cy='4' r='1.5' fill='%23b08020'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 4 L4 18 M4 4 L18 4' stroke='%23e06378' stroke-width='1' fill='none' stroke-linecap='round' opacity='0.45'/%3E%3Ccircle cx='4' cy='4' r='1.5' fill='%23e06378' opacity='0.45'/%3E%3C/svg%3E");
 	background-size: contain;
 	background-repeat: no-repeat;
 }
@@ -457,7 +456,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 }
 
 .inv-card-inner {
-	border: 0.5px solid rgba(180, 130, 60, 0.3);
+	border: 0.5px solid rgba(218, 52, 82, 0.2);
 	border-radius: 2px;
 	padding: 26px 18px 22px;
 }
@@ -479,7 +478,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 .inv-divider-line {
 	width: 44px;
 	height: 0.5px;
-	background: linear-gradient(to right, transparent, rgba(180, 130, 60, 0.65));
+	background: linear-gradient(to right, transparent, rgba(225, 95, 115, 0.5));
 }
 
 .inv-divider-line+svg~.inv-divider-line,
@@ -502,14 +501,14 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	width: 88px;
 	height: 88px;
 	border-radius: 50%;
-	background: radial-gradient(circle at 38% 32%, #d4a837, #7a5a18);
+	background: radial-gradient(circle at 38% 32%, #3a000c, #1a0004);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	box-shadow:
-		0 4px 22px rgba(180, 130, 40, 0.38),
-		0 0 0 3px rgba(180, 130, 60, 0.14),
-		0 0 0 6px rgba(180, 130, 60, 0.06);
+		0 4px 22px rgba(0, 0, 0, 0.4),
+		0 0 0 3px rgba(58, 0, 12, 0.35),
+		0 0 0 6px rgba(26, 0, 4, 0.15);
 	position: relative;
 }
 
@@ -518,7 +517,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	position: absolute;
 	inset: 5px;
 	border-radius: 50%;
-	border: 0.5px solid rgba(255, 215, 100, 0.45);
+	border: 0.5px solid rgba(212, 168, 55, 0.4);
 }
 
 .inv-monogram-inner {
@@ -534,8 +533,9 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-family: "Cinzel", serif;
 	font-size: 24px;
 	font-weight: 600;
-	color: #1a0a0f;
+	color: #e8c878;
 	letter-spacing: 0.06em;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 14px rgba(212, 168, 55, 0.25);
 }
 
 .inv-mono-amp {
@@ -543,7 +543,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-style: italic;
 	font-size: 12px;
 	font-weight: 300;
-	color: rgba(26, 10, 15, 0.6);
+	color: rgba(212, 168, 55, 0.92);
 	margin-top: 1px;
 }
 
@@ -554,7 +554,8 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-size: 8.5px;
 	letter-spacing: 0.45em;
 	text-transform: uppercase;
-	color: rgba(180, 130, 60, 0.8);
+	color: rgba(165, 42, 62, 0.95);
+	font-weight: 500;
 	margin-bottom: 7px;
 }
 
@@ -562,7 +563,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-family: "Cormorant Garamond", serif;
 	font-style: italic;
 	font-size: 13.5px;
-	color: #6b4a28;
+	color: rgba(0, 0, 0, 0.85);
 	margin-bottom: 11px;
 	letter-spacing: 0.03em;
 }
@@ -571,7 +572,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-family: "Cormorant Garamond", serif;
 	font-size: 27px;
 	font-weight: 300;
-	color: #2d1a10;
+	color: rgba(0, 0, 0, 0.85);
 	letter-spacing: 0.02em;
 	line-height: 1.2;
 	margin-bottom: 5px;
@@ -585,29 +586,30 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-family: "Cinzel", serif;
 	font-size: 9.5px;
 	letter-spacing: 0.22em;
-	color: rgba(180, 130, 60, 0.82);
+	color: #a82a40;
 	margin-bottom: 20px;
 }
 
 /* CTA button */
 .inv-btn {
-	background: linear-gradient(145deg, #d4a837, #8b6818);
-	border: none;
+	background: linear-gradient(145deg, #3a000c, #1a0004);
+	border: 1px solid rgba(58, 0, 12, 0.6);
 	border-radius: 40px;
 	padding: 11px 30px;
 	font-family: "Cinzel", serif;
 	font-size: 9.5px;
 	letter-spacing: 0.35em;
 	text-transform: uppercase;
-	color: #1a0a0f;
+	color: #e8c878;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 12px rgba(212, 168, 55, 0.2);
 	cursor: pointer;
-	box-shadow: 0 4px 20px rgba(180, 130, 40, 0.42);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .inv-btn:hover {
 	transform: scale(1.04);
-	box-shadow: 0 6px 28px rgba(180, 130, 40, 0.58);
+	box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55);
 }
 
 .inv-btn:active {
@@ -632,7 +634,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	display: inline-block;
 	width: 40px;
 	height: 0.5px;
-	background: rgba(180, 130, 60, 0.3);
+	background: rgba(218, 52, 82, 0.28);
 }
 
 .inv-footer-text {
@@ -640,7 +642,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-size: 9px;
 	letter-spacing: 0.45em;
 	text-transform: uppercase;
-	color: rgba(180, 130, 60, 0.45);
+	color: rgba(161, 161, 170, 0.55);
 }
 </style>
 
