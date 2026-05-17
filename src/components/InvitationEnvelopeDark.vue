@@ -502,14 +502,14 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	width: 88px;
 	height: 88px;
 	border-radius: 50%;
-	background: radial-gradient(circle at 38% 32%, #3a000c, #1a0004);
+	background: radial-gradient(circle at 38% 32%, #e63752, #820024);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	box-shadow:
-		0 4px 22px rgba(0, 0, 0, 0.4),
-		0 0 0 3px rgba(58, 0, 12, 0.35),
-		0 0 0 6px rgba(26, 0, 4, 0.15);
+		0 4px 22px rgba(165, 18, 82, 0.45),
+		0 0 0 3px rgba(218, 52, 82, 0.15),
+		0 0 0 6px rgba(218, 52, 82, 0.06);
 	position: relative;
 }
 
@@ -518,7 +518,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	position: absolute;
 	inset: 5px;
 	border-radius: 50%;
-	border: 0.5px solid rgba(212, 168, 55, 0.4);
+	border: 0.5px solid rgba(255, 255, 255, 0.35);
 }
 
 .inv-monogram-inner {
@@ -534,7 +534,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-family: "Cinzel", serif;
 	font-size: 24px;
 	font-weight: 600;
-	color: #e8c878;
+	color: #fff7ed;
 	letter-spacing: 0.06em;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 14px rgba(212, 168, 55, 0.25);
 }
@@ -544,7 +544,7 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 	font-style: italic;
 	font-size: 12px;
 	font-weight: 300;
-	color: rgba(212, 168, 55, 0.92);
+	color: rgba(255, 247, 237, 0.75);
 	margin-top: 1px;
 }
 
@@ -593,24 +593,23 @@ const emit = defineEmits<{ (e: "enter"): void }>()
 
 /* CTA button */
 .inv-btn {
-	background: linear-gradient(145deg, #3a000c, #1a0004);
-	border: 1px solid rgba(58, 0, 12, 0.6);
+	background: linear-gradient(145deg, #dc3452, #a80e34);
+	border: none;
 	border-radius: 40px;
 	padding: 11px 30px;
 	font-family: "Cinzel", serif;
 	font-size: 9.5px;
 	letter-spacing: 0.35em;
 	text-transform: uppercase;
-	color: #e8c878;
-	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 12px rgba(212, 168, 55, 0.2);
+	color: #fff7ed;
 	cursor: pointer;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+	box-shadow: 0 4px 20px rgba(165, 18, 82, 0.45);
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .inv-btn:hover {
 	transform: scale(1.04);
-	box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55);
+	box-shadow: 0 6px 28px rgba(218, 52, 82, 0.5);
 }
 
 .inv-btn:active {
