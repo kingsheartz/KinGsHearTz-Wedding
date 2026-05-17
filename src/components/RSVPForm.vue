@@ -16,22 +16,6 @@
 				<div class="pointer-events-none absolute -bottom-12 -left-10 w-32 h-32 bg-rose-600/10 rounded-full blur-3xl">
 				</div>
 
-				<p v-if="feedback === 'config'"
-					class="relative z-10 mb-4 rounded-xl border border-rose-500/30 bg-rose-950/40 px-4 py-3 text-left text-sm text-amber-100/90">
-					RSVP is not connected yet. Add your Apps Script web app URL as
-					<code class="rounded bg-zinc-800 px-1 text-amber-200/90">VITE_RSVP_SCRIPT_URL</code> in a
-					<code class="rounded bg-zinc-800 px-1 text-amber-200/90">.env</code> file (see
-					<code class="rounded bg-zinc-800 px-1 text-amber-200/90">google-apps-script/RSVP.gs</code>).
-				</p>
-				<p v-else-if="feedback === 'ok'"
-					class="relative z-10 mb-4 rounded-xl border border-emerald-500/30 bg-emerald-950/35 px-4 py-3 text-left text-sm text-emerald-100/90">
-					Thank you! Your RSVP has been saved.
-				</p>
-				<p v-else-if="feedback === 'err'"
-					class="relative z-10 mb-4 rounded-xl border border-red-500/35 bg-red-950/35 px-4 py-3 text-left text-sm text-red-100/90">
-					{{ errorMessage }}
-				</p>
-
 				<form class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 text-left" @submit.prevent="onSubmit">
 					<div class="sm:col-span-2">
 						<label class="block text-xs font-medium text-rose-500 mb-1.5">Full Name</label>
@@ -79,6 +63,32 @@
 						<textarea name="message" rows="3" placeholder="Share a wish, prayer, or special memory..."
 							class="w-full border border-rose-100 rounded-xl p-3 text-sm resize-none bg-white/80 text-zinc-500 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50"></textarea>
 					</div>
+
+					<!-- Feedback Messages -->
+					<Transition name="fade">
+						<div v-if="feedback !== 'idle'" class="sm:col-span-2 pt-2 pb-2">
+							<div v-if="feedback === 'config'"
+								class="rounded-2xl border border-amber-200/60 bg-amber-50/90 px-5 py-4 text-sm text-amber-800 shadow-md backdrop-blur-sm flex items-center gap-3">
+								<svg class="w-5 h-5 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+								<p>RSVP is not connected yet. Add your Apps Script web app URL as <code class="bg-amber-100 px-1 rounded">VITE_RSVP_SCRIPT_URL</code> in <code class="bg-amber-100 px-1 rounded">.env</code>.</p>
+							</div>
+							<div v-else-if="feedback === 'ok'"
+								class="rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-5 shadow-[0_8px_30px_rgb(16,185,129,0.15)] flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+								<div class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 shrink-0">
+									<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+								</div>
+								<div>
+									<h4 class="text-emerald-800 font-semibold text-lg mb-0.5">Thank you!</h4>
+									<p class="text-emerald-600/90 text-sm">Your RSVP has been saved beautifully. We can't wait to see you!</p>
+								</div>
+							</div>
+							<div v-else-if="feedback === 'err'"
+								class="rounded-2xl border border-rose-200/60 bg-rose-50/90 px-5 py-4 text-sm text-rose-800 shadow-md backdrop-blur-sm flex items-center gap-3">
+								<svg class="w-5 h-5 text-rose-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+								<p>{{ errorMessage }}</p>
+							</div>
+						</div>
+					</Transition>
 
 					<div class="sm:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 						<p class="text-[11px] text-zinc-500">
@@ -176,6 +186,32 @@ function onSubmit(ev: Event) {
 			'Could not reach the RSVP service. Check the script URL, deployment (“Anyone”), and your connection.'
 	} finally {
 		submitting.value = false
+		
+		// Auto hide the feedback message after 5 seconds
+		setTimeout(() => {
+			if (feedback.value === 'ok' || feedback.value === 'err') {
+				feedback.value = 'idle'
+			}
+		}, 5000)
 	}
 }
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
