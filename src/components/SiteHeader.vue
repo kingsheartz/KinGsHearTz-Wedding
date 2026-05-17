@@ -1,7 +1,27 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { showAdminRSVP } from '../state';
+
 const scrollTo = (id: string) => {
 	const el = document.getElementById(id);
 	if (el) el.scrollIntoView({ behavior: "smooth" });
+};
+
+const clickCount = ref(0);
+let clickTimer: number | null = null;
+
+const handleLogoClick = () => {
+	clickCount.value++;
+	if (clickTimer) clearTimeout(clickTimer);
+	
+	if (clickCount.value >= 5) {
+		showAdminRSVP.value = true;
+		clickCount.value = 0;
+	} else {
+		clickTimer = window.setTimeout(() => {
+			clickCount.value = 0;
+		}, 1000);
+	}
 };
 </script>
 
@@ -10,8 +30,8 @@ const scrollTo = (id: string) => {
 		<div
 			class="flex items-center justify-between rounded-full bg-black/30 backdrop-blur-md border border-white/10 px-4 sm:px-6 py-2.5 shadow-lg shadow-black/40">
 			<div class="flex items-center gap-2 sm:gap-3">
-				<div
-					class="h-8 w-8 rounded-full border border-rose-200/60 bg-rose-100/20 flex items-center justify-center text-[10px] tracking-[0.16em] uppercase">
+				<div @click="handleLogoClick"
+					class="h-8 w-8 rounded-full border border-rose-200/60 bg-rose-100/20 flex items-center justify-center text-[10px] tracking-[0.16em] uppercase cursor-pointer select-none">
 					GK
 				</div>
 				<div class="hidden sm:flex flex-col items-start leading-tight">

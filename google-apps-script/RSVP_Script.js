@@ -5,8 +5,8 @@
  * Accepts JSON in post body, or form field `payload` (hidden iframe POST from the site).
  */
 
-var SPREADSHEET_ID = "1w6fiIF6pl-4jat2webwi2AWqwXe-mTWdZttp33f2nIs";
-var SHEET_NAME = "Guest list - RSVP";
+var SPREADSHEET_ID = '1w6fiIF6pl-4jat2webwi2AWqwXe-mTWdZttp33f2nIs';
+var SHEET_NAME = 'Guest list - RSVP';
 var DATA_START_ROW = 6;
 var COL_FIRST = 2; // B
 var COL_LAST = 11; // K
@@ -14,17 +14,18 @@ var COL_LAST = 11; // K
 var RSVP_NUM_COLS = COL_LAST - COL_FIRST + 1;
 
 // NEW: Secret key to view the list. Change this if you want!
-var ADMIN_SECRET = "gk2027";
+var ADMIN_SECRET = 'gk2027';
 
 function doOptions() {
-  return ContentService.createTextOutput("").setMimeType(ContentService.MimeType.TEXT);
+  return ContentService.createTextOutput('')
+    .setMimeType(ContentService.MimeType.TEXT);
 }
 
 function splitFullName(full) {
   var t = String(full).trim();
-  if (!t) return ["", ""];
-  var i = t.indexOf(" ");
-  if (i < 0) return [t, ""];
+  if (!t) return ['', ''];
+  var i = t.indexOf(' ');
+  if (i < 0) return [t, ''];
   return [t.substring(0, i), t.substring(i + 1).trim()];
 }
 
@@ -37,7 +38,7 @@ function firstEmptyDataRow(sheet) {
   var numRows = last - DATA_START_ROW + 1;
   var colB = sheet.getRange(DATA_START_ROW, COL_FIRST, numRows, 1).getValues();
   for (var i = 0; i < colB.length; i++) {
-    if (String(colB[i][0]).trim() === "") {
+    if (String(colB[i][0]).trim() === '') {
       return DATA_START_ROW + i;
     }
   }
@@ -49,12 +50,12 @@ function parsePayload(e) {
   var p = e.parameter || {};
   if (p.name || p.attendance || p.phone) {
     return {
-      name: String(p.name || "").trim(),
-      phone: String(p.phone || "").trim(),
-      email: String(p.email || "").trim(),
-      guests: String(p.guests || "").trim(),
-      attendance: String(p.attendance || "").trim(),
-      message: String(p.message || "").trim(),
+      name: String(p.name || '').trim(),
+      phone: String(p.phone || '').trim(),
+      email: String(p.email || '').trim(),
+      guests: String(p.guests || '').trim(),
+      attendance: String(p.attendance || '').trim(),
+      message: String(p.message || '').trim(),
     };
   }
   if (p.payload) {
@@ -81,14 +82,14 @@ function parsePayload(e) {
  */
 function doGet(e) {
   try {
-    var p = e ? e.parameter || {} : {};
-
+    var p = e ? (e.parameter || {}) : {};
+    
     // NEW: Handle request to view list
-    if (p.action === "list" && p.secret === ADMIN_SECRET) {
+    if (p.action === 'list' && p.secret === ADMIN_SECRET) {
       var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
       var sh = ss.getSheetByName(SHEET_NAME);
       if (!sh) {
-        return jsonResponse({ ok: false, error: "Sheet not found" });
+        return jsonResponse({ ok: false, error: 'Sheet not found' });
       }
       var lastRow = sh.getLastRow();
       if (lastRow < DATA_START_ROW) {
@@ -96,12 +97,12 @@ function doGet(e) {
       }
       var numRows = lastRow - DATA_START_ROW + 1;
       var data = sh.getRange(DATA_START_ROW, COL_FIRST, numRows, RSVP_NUM_COLS).getValues();
-
+      
       // Filter out empty rows based on Column B (First Name)
       var guests = [];
       for (var i = 0; i < data.length; i++) {
         var row = data[i];
-        if (String(row[0]).trim() !== "") {
+        if (String(row[0]).trim() !== '') {
           guests.push({
             firstName: row[0],
             lastName: row[1],
@@ -112,7 +113,7 @@ function doGet(e) {
             response: row[6],
             attendingCount: row[7],
             children: row[8],
-            notes: row[9],
+            notes: row[9]
           });
         }
       }
@@ -123,62 +124,55 @@ function doGet(e) {
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sh = ss.getSheetByName(SHEET_NAME);
     var lines = [
-      "RSVP script is using:",
-      "• File: " + ss.getName(),
-      "• File ID: " + ss.getId(),
-      '• Tab "' +
-        SHEET_NAME +
-        '": ' +
-        (sh ? "OK" : "MISSING — rename tab or change SHEET_NAME in the script"),
+      'RSVP script is using:',
+      '• File: ' + ss.getName(),
+      '• File ID: ' + ss.getId(),
+      '• Tab "' + SHEET_NAME + '": ' + (sh ? 'OK' : 'MISSING — rename tab or change SHEET_NAME in the script'),
     ];
     if (sh) {
-      lines.push("• Next empty guest row (col B): " + firstEmptyDataRow(sh));
+      lines.push('• Next empty guest row (col B): ' + firstEmptyDataRow(sh));
     }
-    return ContentService.createTextOutput(lines.join("\n")).setMimeType(
-      ContentService.MimeType.TEXT,
-    );
+    return ContentService.createTextOutput(lines.join('\n')).setMimeType(ContentService.MimeType.TEXT);
   } catch (err) {
-    return ContentService.createTextOutput("Error: " + err).setMimeType(
-      ContentService.MimeType.TEXT,
-    );
+    return ContentService.createTextOutput('Error: ' + err).setMimeType(ContentService.MimeType.TEXT);
   }
 }
 
 function doPost(e) {
   try {
-    Logger.log("RSVP doPost");
+    Logger.log('RSVP doPost');
     var data = parsePayload(e);
     if (!data) {
-      Logger.log("parsePayload returned empty");
-      return jsonResponse({ ok: false, error: "empty" });
+      Logger.log('parsePayload returned empty');
+      return jsonResponse({ ok: false, error: 'empty' });
     }
-    var fullName = String(data.name || "").trim();
-    var mobile = String(data.phone || data.mobile || "").trim();
-    var email = String(data.email || "").trim();
-    var guestsRaw = data.guests != null && data.guests !== "" ? String(data.guests).trim() : "";
-    var attendance = String(data.attendance || "").trim();
-    var message = String(data.message || "").trim();
+    var fullName = String(data.name || '').trim();
+    var mobile = String(data.phone || data.mobile || '').trim();
+    var email = String(data.email || '').trim();
+    var guestsRaw = data.guests != null && data.guests !== '' ? String(data.guests).trim() : '';
+    var attendance = String(data.attendance || '').trim();
+    var message = String(data.message || '').trim();
 
-    Logger.log("Fields: name=" + fullName + " phone=" + mobile + " attendance=" + attendance);
+    Logger.log('Fields: name=' + fullName + ' phone=' + mobile + ' attendance=' + attendance);
 
     if (!fullName || !attendance || !mobile) {
-      Logger.log("validation failed — missing name, phone, or attendance");
-      return jsonResponse({ ok: false, error: "validation" });
+      Logger.log('validation failed — missing name, phone, or attendance');
+      return jsonResponse({ ok: false, error: 'validation' });
     }
 
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sheet = ss.getSheetByName(SHEET_NAME);
     if (!sheet) {
-      Logger.log("Sheet not found: " + SHEET_NAME);
-      return jsonResponse({ ok: false, error: "missing_sheet" });
+      Logger.log('Sheet not found: ' + SHEET_NAME);
+      return jsonResponse({ ok: false, error: 'missing_sheet' });
     }
 
     var parts = splitFullName(fullName);
     var firstName = parts[0];
     var lastName = parts[1];
 
-    var happily = attendance.indexOf("Happily") !== -1;
-    var response = happily ? "Yes" : "No";
+    var happily = attendance.indexOf('Happily') !== -1;
+    var response = happily ? 'Yes' : 'No';
 
     var attendingCount = 0;
     if (happily) {
@@ -187,19 +181,19 @@ function doPost(e) {
     }
 
     var tz = Session.getScriptTimeZone();
-    var stamp = Utilities.formatDate(new Date(), tz, "yyyy-MM-dd HH:mm");
-    var notes = message ? message + "\n— Website RSVP, " + stamp : "Website RSVP, " + stamp;
+    var stamp = Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd HH:mm');
+    var notes = message ? message + '\n— Website RSVP, ' + stamp : 'Website RSVP, ' + stamp;
 
     var row = [
       firstName,
       lastName,
       mobile,
       email,
-      "Website",
-      "",
+      'Website',
+      '',
       response,
       attendingCount,
-      "",
+      '',
       notes,
     ];
 
@@ -208,7 +202,7 @@ function doPost(e) {
 
     var verify = sheet.getRange(targetRow, COL_FIRST).getValue();
     Logger.log(
-      "Wrote RSVP row " +
+      'Wrote RSVP row ' +
         targetRow +
         ' in "' +
         ss.getName() +
@@ -216,8 +210,8 @@ function doPost(e) {
         sheet.getName() +
         '" — B' +
         targetRow +
-        " = " +
-        verify,
+        ' = ' +
+        verify
     );
 
     return jsonResponse({
@@ -227,7 +221,7 @@ function doPost(e) {
       tab: sheet.getName(),
     });
   } catch (err) {
-    Logger.log("doPost error: " + err);
+    Logger.log('doPost error: ' + err);
     return jsonResponse({ ok: false, error: String(err) });
   }
 }
@@ -237,7 +231,5 @@ function doPost(e) {
  * (Executions show Failed) while doGet without headers succeeds.
  */
 function jsonResponse(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
-    ContentService.MimeType.JSON,
-  );
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }

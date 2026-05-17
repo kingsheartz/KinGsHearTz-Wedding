@@ -5,6 +5,8 @@ import SparkleCursor from "./components/SparkleCursor.vue"
 import FloatingFlowers from "./components/FloatingFlowers.vue"
 import InvitationEnvelope from "./components/InvitationEnvelope.vue"
 import InvitationEnvelopeDark from "./components/InvitationEnvelopeDark.vue"
+import AdminRSVPList from "./components/AdminRSVPList.vue"
+import { showAdminRSVP } from "./state"
 
 const showIntro = ref(true)
 
@@ -27,5 +29,6 @@ function onEnter() {
 		<Home />
 		<SparkleCursor />
 		<FloatingFlowers />
+		<AdminRSVPList v-if="showAdminRSVP" />
 	</template>
 </template>
