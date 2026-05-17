@@ -36,28 +36,29 @@
 					<div class="sm:col-span-2">
 						<label class="block text-xs font-medium text-rose-500 mb-1.5">Full Name</label>
 						<input name="name" placeholder="Your Name"
-							class="w-full border border-rose-100 rounded-xl p-3 text-sm bg-white/80 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50"
+							class="w-full border border-rose-100 rounded-xl p-3 text-sm bg-white/80 text-zinc-500 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50"
 							required />
 					</div>
 
 					<div>
 						<label class="block text-xs font-medium text-rose-500 mb-1.5">Mobile number</label>
 						<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 …"
-							class="w-full border border-rose-100 rounded-xl p-3 text-sm bg-white/80 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50"
-							required />
+							class="w-full border border-rose-100 rounded-xl p-3 text-sm bg-white/80 text-zinc-500 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50"
+							pattern="^(\+\d{1,4}[ \-]?)?\d{10}$"
+							title="Please enter a valid 10-digit mobile number (e.g., +91 9876543210 or 9876543210)" required />
 					</div>
 
 					<div>
 						<label class="block text-xs font-medium text-rose-500 mb-1.5">Email <span
 								class="text-zinc-500 font-normal">(optional)</span></label>
 						<input name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"
-							class="w-full border border-rose-100 rounded-xl p-3 text-sm bg-white/80 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50" />
+							class="w-full border border-rose-100 rounded-xl p-3 text-sm bg-white/80 text-zinc-500 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50" />
 					</div>
 
 					<div>
 						<label class="block text-xs font-medium text-rose-500 mb-1.5">Number of Guests</label>
 						<input name="guests" placeholder="e.g. 2" type="number" min="1"
-							class="w-full border border-rose-100 rounded-xl p-3 text-sm bg-white/80 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50" />
+							class="w-full border border-rose-100 rounded-xl p-3 text-sm bg-white/80 text-zinc-500 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50" />
 					</div>
 
 					<div>
@@ -76,7 +77,7 @@
 							Message or blessing
 						</label>
 						<textarea name="message" rows="3" placeholder="Share a wish, prayer, or special memory..."
-							class="w-full border border-rose-100 rounded-xl p-3 text-sm resize-none bg-white/80 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50"></textarea>
+							class="w-full border border-rose-100 rounded-xl p-3 text-sm resize-none bg-white/80 text-zinc-500 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500/50"></textarea>
 					</div>
 
 					<div class="sm:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
