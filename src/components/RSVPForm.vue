@@ -112,6 +112,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { showInvitation, rsvpData } from '../state'
 
 const scriptUrl = (import.meta.env.VITE_RSVP_SCRIPT_URL || '').trim()
 
@@ -178,8 +179,23 @@ function onSubmit(ev: Event) {
 
 	try {
 		postPayloadToAppsScript(scriptUrl, payload)
+		
+		// Save RSVP data to global state and localStorage
+		const savedData = {
+			name: payload.name,
+			guests: parseInt(payload.guests || '1', 10),
+			attendance: payload.attendance
+		}
+		rsvpData.value = savedData
+		localStorage.setItem('rsvp_submission', JSON.stringify(savedData))
+
 		feedback.value = 'ok'
 		form.reset()
+
+		// Automatically show the personalized invitation template after a small delay
+		setTimeout(() => {
+			showInvitation.value = true
+		}, 1200)
 	} catch {
 		feedback.value = 'err'
 		errorMessage.value =

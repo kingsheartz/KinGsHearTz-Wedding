@@ -21,7 +21,7 @@
 			</p>
 
 			<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up delay-300">
-				<button @click="scrollToRSVP"
+				<button @click="showInvitation = true"
 					class="px-8 py-3 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-sm sm:text-base font-medium shadow-lg shadow-rose-500/40 transition transform hover:-translate-y-0.5 hover:shadow-rose-500/60">
 					View Invitation
 				</button>
@@ -40,10 +40,7 @@
 </template>
 
 <script setup lang="ts">
-const scrollToRSVP = () => {
-	const el = document.getElementById("rsvp-section");
-	if (el) el.scrollIntoView({ behavior: "smooth" });
-};
+import { showInvitation } from "../state"
 </script>
 
 <style scoped>
