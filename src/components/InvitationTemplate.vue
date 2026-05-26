@@ -85,7 +85,7 @@ const handleClose = () => {
 
 				<!-- Close: fixed to viewport so it stays visible when the card scrolls -->
 				<button @click="handleClose"
-					class="fixed top-4 right-4 text-white/90 hover:text-white bg-black/40 hover:bg-black/55 rounded-full p-2 transition duration-300 focus:outline-none focus:ring-2 focus:ring-rose-300 z-[60] no-print"
+					class="fixed top-4 right-4 text-white/90 hover:text-white bg-black/40 hover:bg-black/55 rounded-full p-2 transition duration-300 focus:outline-none focus:ring-2 focus:ring-rose-300 z-60 no-print"
 					aria-label="Close modal">
 					<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -100,81 +100,65 @@ const handleClose = () => {
 					<div id="print-invitation-area"
 						class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#fffbf0] via-[#fef6e5] to-[#fffbf0] border border-amber-300/40 shadow-[0_25px_60px_-10px_rgba(0,0,0,0.6)] px-6 sm:px-10 py-10 sm:py-12 text-center text-[#5c3e21]">
 
-						<!-- Gold Frame Corner Accents -->
-						<div class="absolute inset-3 border border-amber-500/15 rounded-2xl pointer-events-none"></div>
-						<div class="absolute inset-4.5 border border-amber-600/30 rounded-xl pointer-events-none"></div>
+						<!-- Lavender floral background (reference design) -->
+						<img :src="'./wedding-invitation-background.png'" alt="" class="absolute inset-0 w-full h-full object-cover opacity-95 pointer-events-none" />
+						<!-- Wash out any text baked into the reference image; our dynamic content should be the readable layer. -->
+						<div class="absolute inset-0 bg-white/0 pointer-events-none" />
 
-						<!-- Elegant SVG Corner Flourishes -->
-						<svg class="absolute top-6 left-6 w-8 h-8 text-amber-600/25 pointer-events-none" viewBox="0 0 100 100"
-							fill="none" stroke="currentColor" stroke-width="1.5">
-							<path d="M5,50 C5,20 20,5 50,5 M5,5 C5,5 95,5 95,5 M5,5 C5,5 5,95 5,95 M20,20 C20,30 30,20 20,20" />
-						</svg>
-						<svg class="absolute top-6 right-6 w-8 h-8 text-amber-600/25 rotate-90 pointer-events-none"
-							viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
-							<path d="M5,50 C5,20 20,5 50,5 M5,5 C5,5 95,5 95,5 M5,5 C5,5 5,95 5,95 M20,20 C20,30 30,20 20,20" />
-						</svg>
-						<svg class="absolute bottom-6 left-6 w-8 h-8 text-amber-600/25 -rotate-90 pointer-events-none"
-							viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
-							<path d="M5,50 C5,20 20,5 50,5 M5,5 C5,5 95,5 95,5 M5,5 C5,5 5,95 5,95 M20,20 C20,30 30,20 20,20" />
-						</svg>
-						<svg class="absolute bottom-6 right-6 w-8 h-8 text-amber-600/25 rotate-180 pointer-events-none"
-							viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
-							<path d="M5,50 C5,20 20,5 50,5 M5,5 C5,5 95,5 95,5 M5,5 C5,5 5,95 5,95 M20,20 C20,30 30,20 20,20" />
-						</svg>
-
-						<!-- Monogram / Wedding Emblem -->
-						<div class="relative z-10 mx-auto w-24 h-24 mb-4 select-none">
-							<div
-								class="w-full h-full rounded-full border-2 border-dashed border-amber-600/35 flex items-center justify-center">
+						<div class="relative z-10">
+							<!-- Monogram / Wedding Emblem -->
+							<div class="mx-auto w-24 h-24 mb-4 select-none">
 								<div
-									class="w-20 h-20 rounded-full bg-gradient-to-tr from-amber-600/90 to-rose-600/90 flex flex-col items-center justify-center text-white shadow-md shadow-rose-950/20">
-									<span class="font-romantic text-2xl font-semibold tracking-wider">GK</span>
-									<span class="text-[9px] uppercase tracking-[0.25em] opacity-85 -mt-0.5">Union</span>
+									class="w-full h-full rounded-full border-2 border-dashed border-emerald-700/25 flex items-center justify-center">
+									<div
+										class="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-700/80 to-lime-700/60 flex flex-col items-center justify-center text-white shadow-md shadow-emerald-950/20">
+										<span class="font-script text-2xl font-semibold tracking-wider">GK</span>
+										<span class="text-[9px] uppercase tracking-[0.25em] opacity-85 -mt-0.5">Union</span>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<p class="font-romantic text-xs sm:text-sm uppercase tracking-[0.35em] text-rose-700/80 mb-2">
-							Save Our Date
-						</p>
+							<p class="font-romantic text-xs sm:text-sm uppercase tracking-[0.35em] text-emerald-800/70 mb-2 mt-8">
+								Save Our Date
+							</p>
 
-						<!-- Couple Names -->
-						<h2 class="text-3xl sm:text-4xl font-romantic text-rose-900 mb-1 select-none">
-							Govind <span class="text-amber-600">&amp;</span> Krishnendu
-						</h2>
+							<!-- Couple Names -->
+							<h2 class="text-3xl sm:text-4xl font-script text-emerald-900 mb-1 select-none">
+								Govind <span class="text-emerald-700">&amp;</span> Krishnendu
+							</h2>
 
-						<!-- Decorative Line -->
-						<div class="flex items-center justify-center gap-3 my-4">
-							<span class="h-[0.5px] w-12 bg-amber-600/40"></span>
-							<span class="text-amber-600">✦</span>
-							<span class="h-[0.5px] w-12 bg-amber-600/40"></span>
-						</div>
+							<!-- Decorative Line -->
+							<div class="flex items-center justify-center gap-3 my-4">
+								<span class="h-[0.5px] w-12 bg-emerald-700/35"></span>
+								<span class="text-emerald-700">✦</span>
+								<span class="h-[0.5px] w-12 bg-emerald-700/35"></span>
+							</div>
 
-						<!-- Invitation message -->
-						<p class="text-sm font-light text-amber-900/90 max-w-sm mx-auto leading-relaxed mb-6 font-poppins">
-							Together with their families, they joyfully invite you to celebrate the union of their hearts on their
-							auspicious wedding day.
-						</p>
+							<!-- Invitation message -->
+							<p class="text-sm font-light text-emerald-900/80 max-w-sm mx-auto leading-relaxed mb-6 font-poppins">
+								Together with their families, they joyfully invite you to celebrate the union of their hearts on their
+								auspicious wedding day.
+							</p>
 
-						<!-- Event specifications -->
-						<div
-							class="bg-amber-50/70 border border-amber-200/40 rounded-2xl p-5 mb-6 max-w-sm mx-auto shadow-sm select-none">
+							<!-- Event specifications -->
+							<div
+								class="bg-white/60 border border-emerald-700/20 rounded-2xl p-5 mb-6 max-w-sm mx-auto shadow-sm select-none">
 							<div class="grid grid-cols-3 gap-2 divide-x divide-amber-200/40 text-center">
 								<div>
-									<span class="block text-[10px] uppercase tracking-wider text-amber-700">Day</span>
-									<span class="block font-romantic text-base font-semibold text-rose-900 mt-1">Saturday</span>
+									<span class="block text-[10px] uppercase tracking-wider text-emerald-800/70">Day</span>
+									<span class="block font-romantic text-base font-semibold text-emerald-900 mt-1">Saturday</span>
 								</div>
 								<div>
-									<span class="block text-[10px] uppercase tracking-wider text-amber-700">Date</span>
-									<span class="block font-romantic text-base font-semibold text-rose-900 mt-1">09 Jan 2027</span>
+									<span class="block text-[10px] uppercase tracking-wider text-emerald-800/70">Date</span>
+									<span class="block font-romantic text-base font-semibold text-emerald-900 mt-1">09 Jan 2027</span>
 								</div>
 								<div>
-									<span class="block text-[10px] uppercase tracking-wider text-amber-700">Venue</span>
-									<span class="block font-romantic text-base font-semibold text-rose-900 mt-1">Thrissur</span>
+									<span class="block text-[10px] uppercase tracking-wider text-emerald-800/70">Venue</span>
+									<span class="block font-romantic text-base font-semibold text-emerald-900 mt-1">Thrissur</span>
 								</div>
 							</div>
-							<div class="mt-4 pt-3 border-t border-amber-200/40 text-[11px] text-amber-800 tracking-wider uppercase">
-								Ceremony begins at <span class="font-semibold text-rose-800">11:00 AM IST</span>
+							<div class="mt-4 pt-3 border-t border-emerald-700/20 text-[11px] text-emerald-900/70 tracking-wider uppercase">
+								Ceremony begins at <span class="font-semibold text-emerald-900">11:00 AM IST</span>
 							</div>
 						</div>
 
@@ -265,10 +249,11 @@ const handleClose = () => {
 							</button>
 						</div>
 
-						<!-- Royal Signature Footer -->
-						<div
-							class="mt-8 pt-4 border-t border-amber-600/10 flex items-center justify-center gap-6 select-none font-poppins">
-							<span class="text-[10px] tracking-[0.2em] uppercase text-amber-700/60">With Love</span>
+							<!-- Royal Signature Footer -->
+							<div
+								class="mt-8 pt-4 border-t border-emerald-700/10 flex items-center justify-center gap-6 select-none font-poppins">
+								<span class="text-[10px] tracking-[0.2em] uppercase text-emerald-800/60">With Love</span>
+							</div>
 						</div>
 					</div>
 					</div>
@@ -279,6 +264,8 @@ const handleClose = () => {
 </template>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Dancing+Script:wght@400;500;600&display=swap");
+
 /* ── Overlay Fade ── */
 .overlay-fade-enter-active,
 .overlay-fade-leave-active {
@@ -308,10 +295,12 @@ const handleClose = () => {
 }
 
 /* ── Fonts ── */
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap");
-
 .font-romantic {
 	font-family: "Cinzel", serif;
+}
+
+.font-script {
+	font-family: "Dancing Script", cursive;
 }
 </style>
 
