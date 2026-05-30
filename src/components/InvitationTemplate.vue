@@ -4,13 +4,15 @@ import { showInvitation, rsvpData } from '../state'
 
 // Generate personalized invite link
 const inviteUrl = computed(() => {
-	if (!rsvpData.value) return window.location.origin
+	// Use origin + pathname to include the base path (e.g. /KinGsHearTz-Wedding/) on GitHub Pages
+	const baseUrl = window.location.origin + window.location.pathname
+	if (!rsvpData.value) return baseUrl
 	const params = new URLSearchParams()
 	params.set('name', rsvpData.value.name)
 	params.set('guests', String(rsvpData.value.guests))
 	params.set('attendance', rsvpData.value.attendance)
 	params.set('rsvp', 'true')
-	return `${window.location.origin}?${params.toString()}`
+	return `${baseUrl}?${params.toString()}`
 })
 
 // WhatsApp Share URL (share card with others)
