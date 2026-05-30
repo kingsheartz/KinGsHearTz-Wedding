@@ -104,8 +104,8 @@ const handleClose = () => {
 
 						<!-- Lavender floral background (reference design) -->
 						<img :src="'./wedding-invitation-background.png'" alt="" class="absolute inset-0 w-full h-full object-cover opacity-95 pointer-events-none" />
-						<!-- Wash out any text baked into the reference image; our dynamic content should be the readable layer. -->
-						<div class="absolute inset-0 bg-white/0 pointer-events-none" />
+						<!-- Soft frosted overlay concentrated in the center so text reads clearly while keeping edges vibrant -->
+						<div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 90% 70% at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.5) 50%, transparent 100%); backdrop-filter: blur(1px); -webkit-mask-image: radial-gradient(ellipse 90% 70% at center, black 40%, transparent 100%); mask-image: radial-gradient(ellipse 90% 70% at center, black 40%, transparent 100%);" />
 
 						<div class="relative z-10">
 							<!-- Monogram / Wedding Emblem -->
