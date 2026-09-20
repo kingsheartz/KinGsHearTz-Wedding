@@ -9,7 +9,7 @@ const locations = [
 		title: "Temple Ceremony",
 		place: "Sree Melur Shiva Temple, Melur",
 		embed:
-			"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d977.6609042871575!2d75.70793069611862!3d11.433392281409377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba68a05db8b58a9%3A0xd3eda209fb24a0cc!2sSree%20Melur%20Shiva%20Temple!5e0!3m2!1sen!2sin!4v1773604655809!5m2!1sen!2sin",
+			"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.628268767345!2d76.34762867528063!3d10.291505689829332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b08023046d05bfb%3A0xdee0a197df563805!2sKaladi%20Shiva%20Temple!5e0!3m2!1sen!2sin!4v1789900887922!5m2!1sen!2sin",
 	},
 	{
 		id: "kalyanam",
