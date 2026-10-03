@@ -7,7 +7,7 @@ const locations = [
 		id: "thalikettu",
 		pill: "Thalikettu",
 		title: "Temple Ceremony",
-		place: "Sree Melur Shiva Temple, Melur",
+		place: "Kaladi Shiva Temple, Meloor",
 		embed:
 			"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.628268767345!2d76.34762867528063!3d10.291505689829332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b08023046d05bfb%3A0xdee0a197df563805!2sKaladi%20Shiva%20Temple!5e0!3m2!1sen!2sin!4v1789900887922!5m2!1sen!2sin",
 	},
@@ -15,7 +15,7 @@ const locations = [
 		id: "kalyanam",
 		pill: "Kalyanam",
 		title: "Wedding Venue",
-		place: "MSC convention centre, Melur",
+		place: "MSC convention centre, Meloor",
 		embed:
 			"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22855.745463408264!2d76.36170676566762!3d10.314500158447249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080196c8164d5b%3A0x1b77b47948227284!2sMSC%20convention%20centre!5e0!3m2!1sen!2sin!4v1776109254653!5m2!1sen!2sin",
 	},
