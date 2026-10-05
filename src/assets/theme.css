@@ -61,3 +61,38 @@ body {
 .btn-romantic:hover {
 	background: #be123c;
 }
+
+.bg-mesh-light {
+	background-color: #fff7f8;
+	background-image:
+		radial-gradient(at 0% 0%, rgba(251, 207, 232, 0.45) 0, transparent 50%),
+		radial-gradient(at 100% 100%, rgba(254, 243, 199, 0.35) 0, transparent 45%);
+}
+
+.ken-burns {
+	animation: ken-burns 22s ease-in-out infinite alternate;
+}
+
+@keyframes ken-burns {
+	from {
+		transform: scale(1.02);
+	}
+	to {
+		transform: scale(1.1);
+	}
+}
+
+.btn-glow {
+	box-shadow: 0 12px 32px rgba(244, 63, 94, 0.4);
+	transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.btn-glow:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 16px 40px rgba(244, 63, 94, 0.55);
+	background-color: #e11d48;
+}
+
+.btn-glow:active {
+	transform: translateY(0);
+}

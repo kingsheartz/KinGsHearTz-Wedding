@@ -41,9 +41,11 @@ const events = [
 
 			<div class="grid md:grid-cols-3 gap-6 lg:gap-8">
 				<div
-					v-for="event in events"
+					v-for="(event, index) in events"
 					:key="event.title"
 					class="group rounded-2xl border border-zinc-700/60 bg-zinc-900/50 backdrop-blur-md shadow-xl shadow-black/25 px-8 py-8 text-left transition hover:border-rose-500/35 hover:-translate-y-1"
+					data-aos="fade-up"
+					:data-aos-delay="index * 100"
 				>
 					<div
 						class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-400/20 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition"

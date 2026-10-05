@@ -7,6 +7,14 @@ import "aos/dist/aos.css";
 
 const app = createApp(App);
 
-AOS.init();
+AOS.init({
+	duration: 850,
+	easing: "ease-out-cubic",
+	once: true,
+	offset: 64,
+	disable: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+});
+
+window.addEventListener("load", () => AOS.refresh());
 
 app.mount("#app");

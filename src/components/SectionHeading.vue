@@ -22,7 +22,7 @@ defineProps<{
 			{{ eyebrow }}
 		</p>
 		<h2
-			class="text-3xl sm:text-4xl lg:text-[2.65rem] font-romantic leading-tight mb-3"
+			class="text-3xl sm:text-4xl lg:text-[2.65rem] font-hero leading-tight mb-3"
 			:class="dark ? 'text-rose-50' : 'text-rose-800'"
 		>
 			{{ title }}
