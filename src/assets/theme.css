@@ -96,3 +96,33 @@ body {
 .btn-glow:active {
 	transform: translateY(0);
 }
+
+/* Flip countdown */
+.flip-card-themed {
+	--flip-w: 1.75rem;
+	--flip-h: 2.75rem;
+	--flip-font: 1.3rem;
+	--flip-radius: 12px;
+	--flip-face-top: linear-gradient(180deg, #ffffff 0%, #fff7fa 100%);
+	--flip-face-bottom: linear-gradient(180deg, #fff0f4 0%, #f9b8cc 100%);
+	--flip-border: rgba(201, 154, 106, 0.48);
+	--flip-hinge: rgba(244, 63, 94, 0.15);
+	--flip-digit: #9f1239;
+	--flip-shadow: 0 8px 24px rgba(244, 63, 94, 0.12);
+}
+
+@media (min-width: 640px) {
+	.flip-card-themed {
+		--flip-w: 2.1rem;
+		--flip-h: 3.25rem;
+		--flip-font: 1.55rem;
+		--flip-radius: 14px;
+	}
+}
+
+.text-rose-gold {
+	background: linear-gradient(120deg, #e8b4b8 0%, #d4a574 45%, #c9956c 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}

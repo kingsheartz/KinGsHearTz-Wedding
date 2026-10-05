@@ -11,10 +11,8 @@ AOS.init({
 	duration: 850,
 	easing: "ease-out-cubic",
 	once: true,
-	offset: 64,
+	offset: 48,
 	disable: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
 });
-
-window.addEventListener("load", () => AOS.refresh());
 
 app.mount("#app");

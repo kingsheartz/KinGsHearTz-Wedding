@@ -59,37 +59,21 @@ onBeforeUnmount(() => {
 			class="relative z-10 px-4 sm:px-6 pt-24 pb-28 max-w-3xl transition-transform duration-300 ease-out"
 			:style="{ transform: `translate3d(${pointerX * -0.3}px, ${pointerY * -0.3}px, 0)` }"
 		>
-			<p
-				class="uppercase tracking-[0.3em] text-xs sm:text-sm text-rose-200/80 mb-4 animate-fade-slow"
-				data-aos="fade-down"
-				data-aos-duration="900"
-			>
+			<p class="uppercase tracking-[0.3em] text-xs sm:text-sm text-rose-200/80 mb-4 animate-fade-slow">
 				The Wedding Of
 			</p>
 
-			<h1
-				class="font-hero text-[clamp(2.5rem,8vw,4.5rem)] leading-[1.05] text-white drop-shadow-2xl animate-fade-up"
-				data-aos="zoom-in"
-				data-aos-duration="1100"
-			>
+			<h1 class="font-hero text-[clamp(2.5rem,8vw,4.5rem)] leading-[1.05] text-white drop-shadow-2xl animate-fade-up">
 				<span class="inline-block">Govind</span>
 				<span class="mx-2 sm:mx-3 text-rose-300 font-light">&amp;</span>
 				<span class="inline-block">Krishnendu</span>
 			</h1>
 
-			<p
-				class="mt-6 text-base sm:text-lg text-rose-50/90 mx-auto max-w-xl leading-relaxed animate-fade-up delay-150"
-				data-aos="fade-up"
-				data-aos-delay="200"
-			>
+			<p class="mt-6 text-base sm:text-lg text-rose-50/90 mx-auto max-w-xl leading-relaxed animate-fade-up delay-150">
 				Together with our families, we joyfully invite you to celebrate the beginning of our forever.
 			</p>
 
-			<div
-				class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up delay-300"
-				data-aos="fade-up"
-				data-aos-delay="450"
-			>
+			<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up delay-300">
 				<button
 					type="button"
 					class="btn-glow px-8 py-3.5 rounded-full bg-rose-500 text-white text-sm sm:text-base font-medium"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from "vue"
+import { onMounted, nextTick } from "vue"
 import AOS from "aos"
 
 import SiteHeader from "../components/SiteHeader.vue"
@@ -18,7 +18,8 @@ import BackgroundMusic from "../components/BackgroundMusic.vue"
 import SiteFooter from "../components/SiteFooter.vue"
 import FloatingInviteFab from "../components/FloatingInviteFab.vue"
 
-onMounted(() => {
+onMounted(async () => {
+	await nextTick()
 	requestAnimationFrame(() => AOS.refresh())
 })
 </script>
