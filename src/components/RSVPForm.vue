@@ -1,14 +1,11 @@
 <template>
-	<section id="rsvp-section" class="py-24 text-center bg-rose-50 border-t border-rose-800/80">
+	<section id="rsvp-section" class="py-24 sm:py-28 text-center bg-gradient-to-b from-rose-50 via-white to-rose-50/80 border-t border-rose-100">
 		<div class="max-w-4xl mx-auto px-4 sm:px-6">
-			<p class="uppercase tracking-[0.25em] text-xs text-rose-400 mb-2">
-				We’d love to celebrate with you
-			</p>
-			<h2 class="text-3xl sm:text-4xl font-romantic text-rose-700 mb-2 text-center">RSVP & Wishes</h2>
-			<p class="text-zinc-400 mb-10 mx-auto text-center max-w-lg">
-				Please let us know if you’ll be able to join us on our special day and share a blessing for
-				the couple.
-			</p>
+			<SectionHeading
+				eyebrow="We’d love to celebrate with you"
+				title="RSVP & Wishes"
+				subtitle="Please let us know if you’ll be able to join us on our special day and share a blessing for the couple."
+			/>
 
 			<div
 				class="relative mx-auto bg-gradient-to-b from-white/95 to-rose-50/90 backdrop-blur-md rounded-3xl shadow-[0_24px_60px_rgba(0,0,0,0.35)] border border-rose-100/70 px-6 sm:px-10 py-8 sm:py-10">
@@ -113,6 +110,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { showInvitation, rsvpData } from '../state'
+import SectionHeading from './SectionHeading.vue'
 
 const scriptUrl = (import.meta.env.VITE_RSVP_SCRIPT_URL || '').trim()
 

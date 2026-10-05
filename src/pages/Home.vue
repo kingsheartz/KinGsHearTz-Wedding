@@ -13,6 +13,7 @@ import RSVPForm from "../components/RSVPForm.vue"
 import WhatsAppRSVP from "../components/WhatsAppRSVP.vue"
 import GoogleMapVenue from "../components/GoogleMapVenue.vue"
 import BackgroundMusic from "../components/BackgroundMusic.vue"
+import SiteFooter from "../components/SiteFooter.vue"
 </script>
 
 <template>
@@ -41,4 +42,6 @@ import BackgroundMusic from "../components/BackgroundMusic.vue"
 	<RSVPForm />
 
 	<WhatsAppRSVP />
+
+	<SiteFooter />
 </template>
