@@ -6,7 +6,7 @@ const events = [
 </script>
 
 <template>
-	<section id="story" class="py-20 sm:py-24 bg-rose-50/50 relative overflow-hidden">
+	<section id="story" class="relative z-10 py-20 sm:py-24 bg-rose-50 overflow-hidden isolate">
 		<div
 			class="pointer-events-none absolute -top-24 -right-24 w-64 h-64 rounded-full bg-rose-200/30 blur-3xl"
 		/>
@@ -15,12 +15,12 @@ const events = [
 			<h2 class="font-romantic text-3xl sm:text-4xl text-center text-rose-700 mb-4" data-aos="fade-up">
 				Our Journey Together
 			</h2>
-			<p class="text-center text-gray-600 mx-auto mb-12 max-w-lg" data-aos="fade-up" data-aos-delay="80">
+			<p class="text-center text-gray-700 mx-auto mb-12 max-w-lg leading-relaxed" data-aos="fade-up" data-aos-delay="80">
 				Every moment brought us closer to this day. Here are a few milestones from our love story.
 			</p>
 
 			<div class="relative">
-				<div class="hidden sm:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-rose-300 to-transparent" />
+				<div class="hidden sm:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-rose-200 via-rose-400 to-rose-200" />
 
 				<div class="space-y-10">
 					<div
@@ -45,7 +45,7 @@ const events = [
 							]"
 						>
 							<div
-								class="timeline-card bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg shadow-rose-100/80 px-6 py-5 border border-white/80 text-left sm:text-inherit"
+								class="timeline-card bg-white rounded-2xl shadow-lg shadow-rose-200/60 px-6 py-5 border border-rose-100 text-left sm:text-inherit"
 							>
 								<p class="text-rose-500 text-sm font-semibold tracking-wide">{{ e.year }}</p>
 								<h3 class="mt-1 text-lg font-semibold text-gray-800">{{ e.title }}</h3>

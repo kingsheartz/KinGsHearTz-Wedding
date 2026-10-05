@@ -9,7 +9,6 @@ import DateMarquee from "../components/DateMarquee.vue"
 import CountdownTimer from "../components/CountdownTimer.vue"
 import StoryTimeline from "../components/StoryTimeline.vue"
 import EventDetails from "../components/EventDetails.vue"
-import FloatingPetals from "../components/FloatingPetals.vue"
 import GallerySlider from "../components/GallerySlider.vue"
 import VideoSection from "../components/VideoSection.vue"
 import RSVPForm from "../components/RSVPForm.vue"
@@ -44,8 +43,6 @@ onMounted(() => {
 	<GallerySlider />
 
 	<EventDetails />
-
-	<FloatingPetals />
 
 	<GoogleMapVenue />
 

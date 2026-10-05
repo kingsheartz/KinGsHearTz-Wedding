@@ -9,8 +9,8 @@ const petals = Array.from({ length: 18 }, (_, i) => ({
 </script>
 
 <template>
-	<div class="pointer-events-none fixed inset-0 overflow-hidden z-20">
-		<img v-for="p in petals" :key="p.id" src="/flowers/rose.png" class="absolute opacity-80" :style="{
+	<div class="pointer-events-none fixed inset-0 overflow-hidden z-[1] opacity-50">
+		<img v-for="p in petals" :key="p.id" src="/flowers/rose.png" class="absolute opacity-70" :style="{
 			left: p.left + '%',
 			width: p.size + 'px',
 			height: 'auto',

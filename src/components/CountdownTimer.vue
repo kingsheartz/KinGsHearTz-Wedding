@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<section id="countdown" class="relative py-20 sm:py-24 overflow-hidden bg-mesh-light">
+	<section id="countdown" class="relative z-10 py-20 sm:py-24 overflow-hidden bg-mesh-light isolate">
 		<div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
 			<p
 				class="uppercase tracking-[0.25em] text-xs text-rose-400 mb-2"

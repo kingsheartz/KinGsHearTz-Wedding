@@ -13,7 +13,7 @@ const onPause = () => {
 </script>
 
 <template>
-	<section id="video" class="py-20 sm:py-24 bg-white relative">
+	<section id="video" class="relative z-10 py-20 sm:py-24 bg-white isolate">
 		<div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
 			<h2
 				class="text-3xl sm:text-4xl font-romantic text-rose-700 mb-4"
