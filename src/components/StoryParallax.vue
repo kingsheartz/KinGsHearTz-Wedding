@@ -3,7 +3,7 @@ const stories = [
 	{
 		id: "met",
 		title: "How We Met",
-		subtitle: "Our journey began in 2018",
+		subtitle: "Our journey begins",
 		text: "Two hearts, one serendipitous moment. What started as a simple hello became the beginning of our forever.",
 		bg: "linear-gradient(135deg, rgba(190, 18, 60, 0.75) 0%, rgba(136, 19, 55, 0.85) 100%)"
 	},
