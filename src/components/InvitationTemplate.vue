@@ -138,8 +138,8 @@ const handleClose = () => {
 
 							<!-- Invitation message -->
 							<p class="text-sm font-light text-emerald-900/80 max-w-sm mx-auto leading-relaxed mb-6 font-poppins">
-								Together with their families, they joyfully invite you to celebrate the union of their hearts on their
-								auspicious wedding day.
+								Together with our families, we joyfully invite you to celebrate the union of our hearts on this
+								auspicious day.
 							</p>
 
 							<!-- Event specifications -->

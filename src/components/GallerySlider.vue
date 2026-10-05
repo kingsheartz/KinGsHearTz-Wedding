@@ -9,21 +9,17 @@ import photo6 from "../assets/photos/6.jpg"
 import photo7 from "../assets/photos/7.jpg"
 import photo8 from "../assets/photos/8.jpg"
 import photo9 from "../assets/photos/9.jpg"
-import photo10 from "../assets/photos/10.jpg"
-import photo11 from "../assets/photos/11.jpg"
 
 const photos = [
 	{ src: photo1, caption: "Where Our Story Began" },
 	{ src: photo2, caption: "Two Hearts, One Journey" },
-	{ src: photo3, caption: "The Start of Forever" },
-	{ src: photo4, caption: "Love in Every Little Moment" },
+	{ src: photo3, caption: "Love in Every Little Moment" },
+	{ src: photo4, caption: "Forever Starts Here" },
 	{ src: photo5, caption: "Smiles, Laughter & Love" },
 	{ src: photo6, caption: "Making Memories Together" },
 	{ src: photo7, caption: "A Love Worth Celebrating" },
 	{ src: photo8, caption: "The Moments We Treasure" },
 	{ src: photo9, caption: "With You, Always" },
-	{ src: photo10, caption: "Our Happily Ever After" },
-	{ src: photo11, caption: "Forever Starts Here" },
 ]
 
 const activeIndex = ref<number | null>(null)

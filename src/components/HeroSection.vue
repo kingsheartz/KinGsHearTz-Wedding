@@ -16,8 +16,7 @@
 			</h1>
 
 			<p class="mt-6 text-base sm:text-lg text-rose-50/90 mx-auto animate-fade-up delay-150">
-				Together with their families, they joyfully invite you to celebrate the beginning of their
-				forever.
+				Together with our families, we joyfully invite you to celebrate the beginning of our forever.
 			</p>
 
 			<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up delay-300">
