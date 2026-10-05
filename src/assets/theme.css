@@ -1,38 +1,63 @@
-body{
-/* background: linear-gradient(135deg,#fff0f5,#ffe4e6); */
-font-family: "Poppins", sans-serif;
+html {
+	scroll-behavior: smooth;
 }
 
-.section{
-padding:100px 20px;
+body {
+	/* background: linear-gradient(135deg,#fff0f5,#ffe4e6); */
+	font-family: "Poppins", sans-serif;
 }
 
-.title{
-font-family:"Playfair Display",serif;
-font-size:42px;
-color:#be123c;
+::selection {
+	background: rgba(244, 63, 94, 0.22);
+	color: #881337;
 }
 
-.card{
-background:white;
-border-radius:16px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-padding:30px;
-transition:0.3s;
+.font-hero {
+	font-family: "Playfair Display", Georgia, serif;
 }
 
-.card:hover{
-transform:translateY(-5px);
+.font-special {
+	font-family: "Special Elite", cursive;
 }
 
-.btn-romantic{
-background:#f43f5e;
-color:white;
-padding:12px 30px;
-border-radius:30px;
-transition:0.3s;
+.font-romantic {
+	font-family: "Poppins", sans-serif;
 }
 
-.btn-romantic:hover{
-background:#be123c;
+.font-dancing {
+	font-family: "Dancing Script", cursive;
+}
+
+.section {
+	padding: 100px 20px;
+}
+
+.title {
+	font-family: "Playfair Display", serif;
+	font-size: 42px;
+	color: #be123c;
+}
+
+.card {
+	background: white;
+	border-radius: 16px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+	padding: 30px;
+	transition: 0.3s;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+}
+
+.btn-romantic {
+	background: #f43f5e;
+	color: white;
+	padding: 12px 30px;
+	border-radius: 30px;
+	transition: 0.3s;
+}
+
+.btn-romantic:hover {
+	background: #be123c;
 }
