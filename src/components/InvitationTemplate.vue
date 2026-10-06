@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { showInvitation, rsvpData } from '../state'
+import {
+	CALENDAR_UTC_END,
+	CALENDAR_UTC_START,
+	formatIcsUtcStamp,
+} from '../constants/weddingDate'
 
 // Generate personalized invite link
 const inviteUrl = computed(() => {
@@ -31,7 +36,8 @@ const whatsappConfirmUrl = computed(() => {
 
 // Google Calendar URL
 const googleCalendarUrl = computed(() => {
-	return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Govind+%26+Krishnendu%27s+Wedding&dates=20270109T053000Z/20270109T103000Z&details=You+are+cordially+invited+to+celebrate+the+wedding+of+Govind+%26+Krishnendu+on+Jan+9%2C+2027.+Please+bring+your+invitation+pass.&location=Thrissur%2C+Kerala%2C+India`
+	const dates = `${CALENDAR_UTC_START}/${CALENDAR_UTC_END}`
+	return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Govind+%26+Krishnendu%27s+Wedding&dates=${dates}&details=You+are+cordially+invited+to+celebrate+the+wedding+of+Govind+%26+Krishnendu+on+Jan+9%2C+2027+(8%3A00+AM+%E2%80%93+9%3A00+PM+IST).+Please+bring+your+invitation+pass.&location=Thrissur%2C+Kerala%2C+India`
 })
 
 // Apple / Outlook Calendar File Download (.ics)
@@ -41,10 +47,10 @@ const downloadIcs = () => {
 		'VERSION:2.0',
 		'PRODID:-//KinGsHearTz//Wedding//EN',
 		'BEGIN:VEVENT',
-		'UID:' + Date.now() + '@kingsheartz.wedding',
-		'DTSTAMP:20260526T150000Z',
-		'DTSTART:20270109T053000Z', // 11:00 AM IST (Jan 9, 2027) = 5:30 AM UTC
-		'DTEND:20270109T103000Z',   // 4:00 PM IST (Jan 9, 2027) = 10:30 AM UTC
+		'UID:wedding-20270109@kingsheartz.wedding',
+		'DTSTAMP:' + formatIcsUtcStamp(),
+		'DTSTART:' + CALENDAR_UTC_START,
+		'DTEND:' + CALENDAR_UTC_END,
 		'SUMMARY:Govind & Krishnendu Wedding',
 		'DESCRIPTION:You are cordially invited to celebrate the wedding of Govind & Krishnendu.',
 		'LOCATION:Thrissur\\, Kerala\\, India',

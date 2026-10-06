@@ -1,22 +1,46 @@
 <script setup lang="ts">
-const petals = Array.from({ length: 18 }, (_, i) => ({
-	id: i,
-	left: Math.random() * 100,
-	delay: Math.random() * 6,
-	duration: 10 + Math.random() * 8,
-	size: 10 + Math.random() * 20
-}))
+import { computed, onMounted, ref } from "vue"
+
+const enabled = ref(true)
+
+onMounted(() => {
+	const coarse = window.matchMedia("(pointer: coarse)").matches
+	const narrow = window.matchMedia("(max-width: 768px)").matches
+	const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+	enabled.value = !coarse && !narrow && !reduced
+})
+
+const petals = computed(() =>
+	Array.from({ length: enabled.value ? 12 : 0 }, (_, i) => ({
+		id: i,
+		left: (i * 17 + 5) % 100,
+		delay: (i * 0.7) % 6,
+		duration: 12 + (i % 5),
+		size: 10 + (i % 4) * 4,
+	})),
+)
 </script>
 
 <template>
-	<div class="pointer-events-none fixed inset-0 overflow-hidden z-[1] opacity-50">
-		<img v-for="p in petals" :key="p.id" src="/flowers/rose.png" class="absolute opacity-70" :style="{
-			left: p.left + '%',
-			width: p.size + 'px',
-			height: 'auto',
-			animationDelay: p.delay + 's',
-			animationDuration: p.duration + 's'
-		}" alt="" />
+	<div
+		v-if="enabled"
+		class="flowers-layer pointer-events-none fixed inset-0 overflow-hidden z-[1] opacity-35"
+		aria-hidden="true"
+	>
+		<img
+			v-for="p in petals"
+			:key="p.id"
+			src="/flowers/rose.png"
+			class="flower-petal absolute opacity-60"
+			:style="{
+				left: p.left + '%',
+				width: p.size + 'px',
+				height: 'auto',
+				animationDelay: p.delay + 's',
+				animationDuration: p.duration + 's',
+			}"
+			alt=""
+		/>
 	</div>
 </template>
 
@@ -27,8 +51,8 @@ const petals = Array.from({ length: 18 }, (_, i) => ({
 		opacity: 0;
 	}
 
-	10% {
-		opacity: 0.85;
+	12% {
+		opacity: 0.55;
 	}
 
 	100% {
@@ -37,7 +61,18 @@ const petals = Array.from({ length: 18 }, (_, i) => ({
 	}
 }
 
-img {
+.flowers-layer {
+	contain: strict;
+}
+
+.flower-petal {
 	animation: flower-fall linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.flower-petal {
+		animation: none;
+		display: none;
+	}
 }
 </style>

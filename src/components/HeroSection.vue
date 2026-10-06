@@ -7,52 +7,74 @@ const scrollToCountdown = () => {
 	document.getElementById("countdown")?.scrollIntoView({ behavior: "smooth" })
 }
 
-const parallaxY = ref(0)
 const pointerX = ref(0)
 const pointerY = ref(0)
-
-const onScroll = () => {
-	parallaxY.value = Math.min(window.scrollY * 0.35, 180)
-}
+const motionEnabled = ref(true)
+const heroInView = ref(true)
+const heroRef = ref<HTMLElement | null>(null)
 
 const onMove = (e: MouseEvent) => {
+	if (!motionEnabled.value || !heroInView.value) return
 	const w = window.innerWidth
 	const h = window.innerHeight
 	pointerX.value = (e.clientX / w - 0.5) * 12
 	pointerY.value = (e.clientY / h - 0.5) * 8
 }
 
+let heroObserver: IntersectionObserver | undefined
+
 onMounted(() => {
-	window.addEventListener("scroll", onScroll, { passive: true })
-	window.addEventListener("mousemove", onMove, { passive: true })
+	const coarse = window.matchMedia("(pointer: coarse)").matches
+	const narrow = window.matchMedia("(max-width: 768px)").matches
+	const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+	motionEnabled.value = !coarse && !narrow && !reduced
+
+	if (motionEnabled.value) {
+		window.addEventListener("mousemove", onMove, { passive: true })
+	}
+
+	const el = heroRef.value
+	if (el) {
+		heroObserver = new IntersectionObserver(
+			([entry]) => {
+				heroInView.value = entry?.isIntersecting ?? false
+			},
+			{ threshold: 0.05 },
+		)
+		heroObserver.observe(el)
+	}
 })
 
 onBeforeUnmount(() => {
-	window.removeEventListener("scroll", onScroll)
 	window.removeEventListener("mousemove", onMove)
+	heroObserver?.disconnect()
 })
 </script>
 
 <template>
 	<section
-		class="hero relative min-h-[100svh] flex flex-col items-center justify-center text-center overflow-hidden"
+		ref="heroRef"
+		class="hero relative min-h-[100svh] flex flex-col items-center justify-center text-center overflow-hidden isolate"
 	>
 		<div
-			class="hero-media absolute inset-0 will-change-transform"
+			class="hero-media absolute inset-0"
 			:style="{
-				transform: `translate3d(${pointerX}px, ${parallaxY + pointerY}px, 0) scale(1.08)`,
+				transform: motionEnabled && heroInView
+					? `translate3d(${pointerX}px, ${pointerY}px, 0) scale(1.06)`
+					: undefined,
 			}"
 		>
 			<img
 				:src="heroPhoto"
 				alt="Govind and Krishnendu"
-				class="hero-photo absolute inset-0 h-full w-full object-cover ken-burns"
+				class="hero-photo absolute inset-0 h-full w-full object-cover"
+				:class="{ 'ken-burns': motionEnabled && heroInView }"
 			/>
 		</div>
 
 		<div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-rose-950/90" />
 		<div
-			class="pointer-events-none absolute inset-0 opacity-40 mix-blend-soft-light bg-[radial-gradient(circle_at_20%_20%,rgba(251,191,36,0.35),transparent_45%),radial-gradient(circle_at_80%_70%,rgba(244,63,94,0.35),transparent_50%)]"
+			class="pointer-events-none absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_20%_20%,rgba(251,191,36,0.4),transparent_45%),radial-gradient(circle_at_80%_70%,rgba(244,63,94,0.4),transparent_50%)]"
 		/>
 
 		<div
@@ -160,16 +182,21 @@ onBeforeUnmount(() => {
 	animation: bounce-soft 2.2s ease-in-out infinite;
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 768px), (pointer: coarse), (prefers-reduced-motion: reduce) {
 	.ken-burns,
-	.animate-bounce-soft,
+	.animate-bounce-soft {
+		animation: none !important;
+	}
+	.hero-media {
+		transform: none !important;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
 	.animate-fade-up,
 	.animate-fade-slow {
 		animation: none !important;
 		opacity: 1;
-	}
-	.hero-media {
-		transform: none !important;
 	}
 }
 </style>

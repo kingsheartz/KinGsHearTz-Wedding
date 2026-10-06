@@ -7,12 +7,20 @@ import "aos/dist/aos.css";
 
 const app = createApp(App);
 
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const prefersCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+const isNarrowViewport = window.matchMedia("(max-width: 768px)").matches;
+
 AOS.init({
-	duration: 850,
+	duration: 700,
 	easing: "ease-out-cubic",
 	once: true,
-	offset: 48,
-	disable: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+	offset: 60,
+	anchorPlacement: "top-bottom",
+	throttleDelay: 99,
+	debounceDelay: 50,
+	startEvent: "DOMContentLoaded",
+	disable: prefersReducedMotion || prefersCoarsePointer || isNarrowViewport,
 });
 
 app.mount("#app");

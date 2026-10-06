@@ -2,9 +2,10 @@
 import { ref, computed, onMounted, onBeforeUnmount } from "vue"
 import launchFireworks from "./Fireworks"
 import FlipClockGroup from "./FlipClockGroup.vue"
+import { JOURNEY_START_DATE, WEDDING_DATE } from "../constants/weddingDate"
 
-const weddingDate = new Date("2027-01-09T00:00:00")
-const startDate = new Date("2026-01-01T00:00:00")
+const weddingDate = WEDDING_DATE
+const startDate = JOURNEY_START_DATE
 
 const daysNum = ref(0)
 const hoursNum = ref(0)
@@ -114,7 +115,7 @@ onBeforeUnmount(() => {
 			<div
 				v-else
 				class="mt-6 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-rose-500 text-white shadow-lg shadow-rose-400/60"
-				data-aos="zoom-in"
+				data-aos="fade-up"
 			>
 				<span class="text-lg font-medium">Today is the big day!</span>
 			</div>
@@ -280,16 +281,14 @@ onBeforeUnmount(() => {
 	border: 1px solid rgba(212, 165, 116, 0.45);
 	background: linear-gradient(
 		155deg,
-		rgba(255, 255, 255, 0.82) 0%,
-		rgba(255, 247, 249, 0.72) 50%,
-		rgba(255, 240, 245, 0.78) 100%
+		rgba(255, 255, 255, 0.96) 0%,
+		rgba(255, 247, 249, 0.94) 50%,
+		rgba(255, 240, 245, 0.95) 100%
 	);
 	box-shadow:
 		0 22px 50px -18px rgba(136, 19, 57, 0.14),
 		inset 0 1px 0 rgba(255, 255, 255, 0.95),
 		0 0 28px -6px rgba(251, 207, 232, 0.45);
-	backdrop-filter: blur(16px);
-	-webkit-backdrop-filter: blur(16px);
 }
 
 .countdown-shell::before {

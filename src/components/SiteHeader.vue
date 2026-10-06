@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue"
+import { ref } from "vue"
 import { showAdminRSVP } from "../state"
 import { useScrollSpy } from "../composables/useScrollSpy"
+import { useRafScroll } from "../composables/useRafScroll"
 
 const navItems = [
 	{ id: "story", label: "Story" },
@@ -19,9 +20,9 @@ const scrollTo = (id: string) => {
 	document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
 }
 
-const onScroll = () => {
+useRafScroll(() => {
 	scrolled.value = window.scrollY > 48
-}
+})
 
 const clickCount = ref(0)
 let clickTimer: number | null = null
@@ -39,14 +40,6 @@ const handleLogoClick = () => {
 	}
 }
 
-onMounted(() => {
-	onScroll()
-	window.addEventListener("scroll", onScroll, { passive: true })
-})
-
-onBeforeUnmount(() => {
-	window.removeEventListener("scroll", onScroll)
-})
 </script>
 
 <template>

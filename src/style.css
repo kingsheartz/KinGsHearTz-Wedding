@@ -303,3 +303,12 @@ code {
     border-right-color: var(--border);
   }
 }
+
+/* Home mounts after intro; AOS hides [data-aos] until animated — show immediately on touch/coarse */
+@media (max-width: 768px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
