@@ -45,10 +45,10 @@ const digits = computed(() => {
 	margin-top: 0.65rem;
 	font-family: "Poppins", system-ui, sans-serif;
 	font-size: 0.5625rem;
-	font-weight: 600;
-	letter-spacing: 0.28em;
+	font-weight: 500;
+	letter-spacing: 0.2em;
 	text-transform: uppercase;
-	color: rgba(107, 16, 40, 0.55);
+	color: var(--flip-label, #a8847a);
 	text-align: center;
 	width: 100%;
 }

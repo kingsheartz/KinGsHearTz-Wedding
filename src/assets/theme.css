@@ -97,18 +97,19 @@ body {
 	transform: translateY(0);
 }
 
-/* Flip countdown — wedding rose / wine tiles */
+/* Flip countdown — dark burgundy tiles (mockup) */
 .flip-clock-theme {
 	--flip-radius: 10px;
-	--flip-face-top: linear-gradient(180deg, #5a2840 0%, #452033 48%, #3a1a2c 100%);
-	--flip-face-bottom: linear-gradient(180deg, #331525 0%, #2a111f 52%, #220e19 100%);
-	--flip-border: rgba(80, 20, 40, 0.55);
-	--flip-hinge: rgba(0, 0, 0, 0.5);
-	--flip-digit: #fff5f7;
+	--flip-face-top: linear-gradient(180deg, #4a2838 0%, #3b1e2b 52%, #321822 100%);
+	--flip-face-bottom: linear-gradient(180deg, #2a1520 0%, #351a26 48%, #3f2230 100%);
+	--flip-border: rgba(255, 255, 255, 0.07);
+	--flip-hinge: rgba(0, 0, 0, 0.55);
+	--flip-digit: #ffffff;
 	--flip-shadow:
-		0 8px 22px rgba(107, 16, 40, 0.22),
-		inset 0 1px 0 rgba(255, 220, 230, 0.12),
-		inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+		0 12px 26px -6px rgba(45, 22, 34, 0.45),
+		0 4px 10px rgba(45, 22, 34, 0.22),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	--flip-label: #a8847a;
 
 	--flip-w-time: 1.85rem;
 	--flip-inner-gap: 0.4rem;
@@ -118,12 +119,16 @@ body {
 		3 * (2 * var(--flip-w-time) + var(--flip-inner-gap)) + 2 * var(--flip-colon-w) + 4 * var(--flip-row-gap)
 	);
 	--flip-h-time: 2.85rem;
+	--flip-font-time: 1.45rem;
+	/* Days row taller than H:M:S; width stays on --flip-time-track */
+	--flip-h-day: calc(var(--flip-h-time) * 1.88);
+	--flip-font-day: calc(var(--flip-font-time) * 1.92);
 }
 
 .flip-group--day {
-	--flip-h: 3.35rem;
-	--flip-font: 1.75rem;
-	--flip-radius: 11px;
+	--flip-h: var(--flip-h-day);
+	--flip-font: var(--flip-font-day);
+	--flip-radius: 12px;
 	width: var(--flip-time-track);
 }
 
@@ -140,9 +145,9 @@ body {
 
 .flip-group--time {
 	--flip-w: var(--flip-w-time);
-	--flip-h: 2.85rem;
-	--flip-font: 1.45rem;
-	--flip-radius: 10px;
+	--flip-h: var(--flip-h-time);
+	--flip-font: var(--flip-font-time);
+	--flip-radius: var(--flip-radius);
 }
 
 .flip-group--time .flip-group-digits {
@@ -155,17 +160,15 @@ body {
 		--flip-row-gap: 0.5rem;
 		--flip-colon-w: 0.55rem;
 		--flip-h-time: 3.35rem;
+		--flip-font-time: 1.85rem;
 	}
 
 	.flip-group--day {
-		--flip-h: 4rem;
-		--flip-font: 2.15rem;
-		--flip-radius: 12px;
+		--flip-radius: 14px;
+		--flip-font-day: calc(var(--flip-font-time) * 1.85);
 	}
 
 	.flip-group--time {
-		--flip-h: 3.35rem;
-		--flip-font: 1.85rem;
 		--flip-radius: 11px;
 	}
 }

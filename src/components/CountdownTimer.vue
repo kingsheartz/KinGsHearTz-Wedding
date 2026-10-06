@@ -95,6 +95,10 @@ onBeforeUnmount(() => {
 				data-aos="fade-up"
 				data-aos-delay="160"
 			>
+				<span class="countdown-shell-heart countdown-shell-heart--left" aria-hidden="true">♥</span>
+				<span class="countdown-shell-heart countdown-shell-heart--right" aria-hidden="true">♥</span>
+				<span class="countdown-shell-heart countdown-shell-heart--bottom" aria-hidden="true">♥</span>
+
 				<div class="flip-clock-stack">
 					<div class="flip-clock-row flip-clock-row--days">
 						<FlipClockGroup
@@ -106,9 +110,9 @@ onBeforeUnmount(() => {
 					</div>
 					<div class="flip-clock-row flip-clock-row--time">
 						<FlipClockGroup variant="time" :value="hoursStr" label="Hours" :min-digits="2" />
-						<span class="flip-colon" aria-hidden="true">:</span>
+						<span class="flip-separator" aria-hidden="true"><i /><i /></span>
 						<FlipClockGroup variant="time" :value="minutesStr" label="Minutes" :min-digits="2" />
-						<span class="flip-colon" aria-hidden="true">:</span>
+						<span class="flip-separator" aria-hidden="true"><i /><i /></span>
 						<FlipClockGroup variant="time" :value="secondsStr" label="Seconds" :min-digits="2" />
 					</div>
 				</div>
@@ -281,17 +285,19 @@ onBeforeUnmount(() => {
 	max-width: calc(100% - 0.5rem);
 	padding: 1.25rem 1rem 1.1rem;
 	border-radius: 1.5rem;
+	border: 1px solid rgba(212, 165, 116, 0.45);
 	background: linear-gradient(
 		155deg,
-		rgba(255, 255, 255, 0.97) 0%,
-		rgba(255, 247, 249, 0.95) 45%,
-		rgba(255, 240, 245, 0.96) 100%
+		rgba(255, 255, 255, 0.82) 0%,
+		rgba(255, 247, 249, 0.72) 50%,
+		rgba(255, 240, 245, 0.78) 100%
 	);
 	box-shadow:
-		0 22px 50px -18px rgba(136, 19, 57, 0.16),
+		0 22px 50px -18px rgba(136, 19, 57, 0.14),
 		inset 0 1px 0 rgba(255, 255, 255, 0.95),
-		0 0 28px -6px rgba(251, 207, 232, 0.4);
-	border: 1px solid rgba(212, 165, 116, 0.45);
+		0 0 28px -6px rgba(251, 207, 232, 0.45);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
 }
 
 .countdown-shell::before {
@@ -300,7 +306,7 @@ onBeforeUnmount(() => {
 	inset: 5px;
 	border-radius: 1.25rem;
 	border: 1px solid rgba(255, 255, 255, 0.55);
-	box-shadow: inset 0 0 0 1px rgba(212, 165, 116, 0.12);
+	box-shadow: inset 0 0 0 1px rgba(212, 165, 116, 0.15);
 	pointer-events: none;
 }
 
@@ -349,26 +355,58 @@ onBeforeUnmount(() => {
 	display: none;
 }
 
-.flip-colon {
+.countdown-shell-heart {
+	position: absolute;
+	font-size: 0.45rem;
+	color: rgba(212, 165, 116, 0.75);
+	pointer-events: none;
+	z-index: 2;
+}
+
+.countdown-shell-heart--left {
+	top: 50%;
+	left: 0.55rem;
+	transform: translateY(-50%);
+}
+
+.countdown-shell-heart--right {
+	top: 50%;
+	right: 0.55rem;
+	transform: translateY(-50%);
+}
+
+.countdown-shell-heart--bottom {
+	bottom: 0.4rem;
+	left: 50%;
+	transform: translateX(-50%);
+	color: rgba(136, 19, 57, 0.35);
+}
+
+.flip-separator {
 	flex: 0 0 var(--flip-colon-w);
-	width: var(--flip-colon-w);
 	align-self: flex-start;
 	height: var(--flip-h-time, 2.85rem);
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	font-family: "Poppins", system-ui, sans-serif;
-	font-size: 1.25rem;
-	font-weight: 300;
-	line-height: 1;
-	color: rgba(201, 149, 108, 0.65);
-	margin-top: 0.05rem;
-	user-select: none;
+	gap: 0.32rem;
+	padding: 0 0.02rem;
+}
+
+.flip-separator i {
+	display: block;
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: var(--flip-label, #a8847a);
+	opacity: 0.92;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
 }
 
 @media (min-width: 640px) {
-	.flip-colon {
-		font-size: 1.5rem;
+	.flip-separator {
+		gap: 0.4rem;
 	}
 }
 
