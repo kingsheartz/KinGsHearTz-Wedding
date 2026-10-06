@@ -100,15 +100,15 @@ body {
 /* Flip countdown — dark burgundy tiles (mockup) */
 .flip-clock-theme {
 	--flip-radius: 10px;
-	--flip-face-top: linear-gradient(180deg, #4a2838 0%, #3b1e2b 52%, #321822 100%);
-	--flip-face-bottom: linear-gradient(180deg, #2a1520 0%, #351a26 48%, #3f2230 100%);
+	/* One gradient for the full tile — halves clip it so the seam stays continuous */
+	--flip-face: linear-gradient(180deg, #4a2838 0%, #3b1e2b 46%, #351a26 54%, #3a1f2d 100%);
 	--flip-border: rgba(255, 255, 255, 0.07);
-	--flip-hinge: rgba(0, 0, 0, 0.55);
+	--flip-hinge: rgba(0, 0, 0, 0.38);
 	--flip-digit: #ffffff;
-	--flip-shadow:
-		0 12px 26px -6px rgba(45, 22, 34, 0.45),
-		0 4px 10px rgba(45, 22, 34, 0.22),
-		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	--flip-outer-shadow:
+		0 10px 22px -4px rgba(45, 22, 34, 0.38),
+		0 3px 8px rgba(45, 22, 34, 0.2);
+	--flip-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	--flip-label: #a8847a;
 
 	--flip-w-time: 1.85rem;

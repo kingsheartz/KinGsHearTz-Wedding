@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref, watch } from "vue"
+import { onBeforeUnmount, ref, watch } from "vue"
 
 const props = defineProps<{
 	value: string
 }>()
 
-const FLIP_MS = 300
+const FLIP_HALF_MS = 300
+/** Top flap, then bottom flap — sequential, not overlapping */
+const FLIP_MS = FLIP_HALF_MS * 2
 
 const topStatic = ref(props.value)
 const bottomStatic = ref(props.value)
@@ -14,33 +16,57 @@ const flipOld = ref(props.value)
 const flipNew = ref(props.value)
 
 let flipTimer: number | undefined
+let topRevealTimer: number | undefined
+
+function clearFlipTimers() {
+	if (flipTimer) {
+		window.clearTimeout(flipTimer)
+		flipTimer = undefined
+	}
+	if (topRevealTimer) {
+		window.clearTimeout(topRevealTimer)
+		topRevealTimer = undefined
+	}
+}
 
 watch(
 	() => props.value,
 	(next) => {
-		if (next === topStatic.value && !isFlipping.value) return
+		if (next === bottomStatic.value && !isFlipping.value) return
 
 		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 		if (reduced) {
+			clearFlipTimers()
 			topStatic.value = next
 			bottomStatic.value = next
+			isFlipping.value = false
 			return
 		}
 
-		if (flipTimer) window.clearTimeout(flipTimer)
+		clearFlipTimers()
 
-		flipOld.value = topStatic.value
+		const from = bottomStatic.value
+		flipOld.value = from
 		flipNew.value = next
-		topStatic.value = next
-		bottomStatic.value = flipOld.value
+		// Full old digit on both halves while the top flap drops
+		topStatic.value = from
+		bottomStatic.value = from
 		isFlipping.value = true
 
+		topRevealTimer = window.setTimeout(() => {
+			topRevealTimer = undefined
+			topStatic.value = next
+		}, FLIP_HALF_MS)
+
 		flipTimer = window.setTimeout(() => {
+			flipTimer = undefined
 			bottomStatic.value = next
 			isFlipping.value = false
 		}, FLIP_MS)
 	},
 )
+
+onBeforeUnmount(() => clearFlipTimers())
 </script>
 
 <template>
@@ -70,15 +96,27 @@ watch(
 	position: relative;
 	perspective: 400px;
 	flex-shrink: 0;
+	border-radius: var(--flip-radius);
+}
+
+.flip-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	box-shadow: var(--flip-outer-shadow);
+	pointer-events: none;
+	z-index: -1;
 }
 
 .flip-card-inner {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	border-radius: var(--flip-radius);
+	border-radius: inherit;
+	border: 1px solid var(--flip-border);
+	box-shadow: var(--flip-inset-highlight);
 	overflow: hidden;
-	box-shadow: var(--flip-shadow);
 }
 
 .flip-card-inner::after {
@@ -88,6 +126,7 @@ watch(
 	right: 0;
 	top: 50%;
 	height: 1px;
+	margin-top: -0.5px;
 	background: var(--flip-hinge);
 	z-index: 5;
 	pointer-events: none;
@@ -104,13 +143,16 @@ watch(
 	display: flex;
 	justify-content: center;
 	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
 }
 
 .flip-card-face-top,
 .flip-card-top-flip {
 	top: 0;
 	align-items: flex-end;
-	background: var(--flip-face-top);
+	background: var(--flip-face);
+	background-size: 100% var(--flip-h);
+	background-position: top center;
 	border-radius: var(--flip-radius) var(--flip-radius) 0 0;
 }
 
@@ -118,21 +160,10 @@ watch(
 .flip-card-bottom-flip {
 	bottom: 0;
 	align-items: flex-start;
-	background: var(--flip-face-bottom);
+	background: var(--flip-face);
+	background-size: 100% var(--flip-h);
+	background-position: bottom center;
 	border-radius: 0 0 var(--flip-radius) var(--flip-radius);
-}
-
-.flip-card-face-top,
-.flip-card-face-bottom {
-	border: 1px solid var(--flip-border);
-}
-
-.flip-card-face-top {
-	border-bottom: none;
-}
-
-.flip-card-face-bottom {
-	border-top: none;
 }
 
 .flip-card-number {
@@ -142,6 +173,7 @@ watch(
 	line-height: 1;
 	color: var(--flip-digit);
 	font-variant-numeric: tabular-nums;
+	-webkit-font-smoothing: antialiased;
 }
 
 .flip-card-face-top .flip-card-number,
@@ -156,25 +188,21 @@ watch(
 
 .flip-card-top-flip {
 	transform-origin: bottom;
-	z-index: 2;
-	border: 1px solid var(--flip-border);
-	border-bottom: none;
+	z-index: 3;
 }
 
 .flip-card-bottom-flip {
 	transform-origin: top;
 	transform: rotateX(90deg);
-	z-index: 1;
-	border: 1px solid var(--flip-border);
-	border-top: none;
+	z-index: 4;
 }
 
 .flip-card.flipping .flip-card-top-flip {
-	animation: flip-top 0.3s ease-in forwards;
+	animation: flip-top var(--flip-half-ms, 300ms) ease-in forwards;
 }
 
 .flip-card.flipping .flip-card-bottom-flip {
-	animation: flip-bottom 0.3s ease-out 0.15s forwards;
+	animation: flip-bottom var(--flip-half-ms, 300ms) ease-out var(--flip-half-ms, 300ms) forwards;
 }
 
 @keyframes flip-top {
