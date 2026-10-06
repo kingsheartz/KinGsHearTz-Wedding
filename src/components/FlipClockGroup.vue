@@ -39,17 +39,16 @@ const digits = computed(() => {
 .flip-group-digits {
 	display: flex;
 	align-items: center;
-	gap: 0.4rem;
 }
 
 .flip-group-label {
 	margin-top: 0.65rem;
 	font-family: "Poppins", system-ui, sans-serif;
 	font-size: 0.5625rem;
-	font-weight: 500;
+	font-weight: 600;
 	letter-spacing: 0.28em;
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.42);
+	color: rgba(107, 16, 40, 0.55);
 	text-align: center;
 	width: 100%;
 }

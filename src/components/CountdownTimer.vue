@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
 
 			<div
 				v-if="!isWeddingDay"
-				class="countdown-shell flip-clock-dark"
+				class="countdown-shell flip-clock-theme"
 				data-aos="fade-up"
 				data-aos-delay="160"
 			>
@@ -277,22 +277,37 @@ onBeforeUnmount(() => {
 .countdown-shell {
 	position: relative;
 	display: inline-block;
-	max-width: 100%;
-	width: min(100%, 22rem);
-	padding: 1.35rem 1.1rem 1.15rem;
-	border-radius: 1.25rem;
-	background: linear-gradient(165deg, #2a2e36 0%, #1c1f26 45%, #14171d 100%);
+	width: fit-content;
+	max-width: calc(100% - 0.5rem);
+	padding: 1.25rem 1rem 1.1rem;
+	border-radius: 1.5rem;
+	background: linear-gradient(
+		155deg,
+		rgba(255, 255, 255, 0.97) 0%,
+		rgba(255, 247, 249, 0.95) 45%,
+		rgba(255, 240, 245, 0.96) 100%
+	);
 	box-shadow:
-		0 24px 48px -12px rgba(0, 0, 0, 0.45),
-		inset 0 1px 0 rgba(255, 255, 255, 0.06);
-	border: 1px solid rgba(255, 255, 255, 0.06);
+		0 22px 50px -18px rgba(136, 19, 57, 0.16),
+		inset 0 1px 0 rgba(255, 255, 255, 0.95),
+		0 0 28px -6px rgba(251, 207, 232, 0.4);
+	border: 1px solid rgba(212, 165, 116, 0.45);
+}
+
+.countdown-shell::before {
+	content: "";
+	position: absolute;
+	inset: 5px;
+	border-radius: 1.25rem;
+	border: 1px solid rgba(255, 255, 255, 0.55);
+	box-shadow: inset 0 0 0 1px rgba(212, 165, 116, 0.12);
+	pointer-events: none;
 }
 
 @media (min-width: 640px) {
 	.countdown-shell {
-		width: min(100%, 26rem);
-		padding: 1.65rem 1.35rem 1.35rem;
-		border-radius: 1.35rem;
+		padding: 1.45rem 1.2rem 1.25rem;
+		border-radius: 1.65rem;
 	}
 }
 
@@ -317,57 +332,43 @@ onBeforeUnmount(() => {
 }
 
 .flip-clock-row--days {
-	padding-bottom: 0.15rem;
+	padding-bottom: 0.1rem;
 }
 
 .flip-clock-row--time {
-	--flip-h: 2.85rem;
+	width: var(--flip-time-track);
 	flex-wrap: nowrap;
-	gap: 0.35rem;
+	gap: var(--flip-row-gap);
+	margin-inline: auto;
 	overflow-x: auto;
 	scrollbar-width: none;
 	-webkit-overflow-scrolling: touch;
-	padding: 0 0.15rem;
-}
-
-@media (min-width: 640px) {
-	.flip-clock-row--time {
-		--flip-h: 3.35rem;
-	}
 }
 
 .flip-clock-row--time::-webkit-scrollbar {
 	display: none;
 }
 
-@media (min-width: 640px) {
-	.flip-clock-row--time {
-		gap: 0.5rem;
-	}
-}
-
 .flip-colon {
-	flex-shrink: 0;
+	flex: 0 0 var(--flip-colon-w);
+	width: var(--flip-colon-w);
 	align-self: flex-start;
-	height: var(--flip-h, 2.85rem);
+	height: var(--flip-h-time, 2.85rem);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0 0.05rem;
-	font-family: "Inter", system-ui, sans-serif;
-	font-size: 1.35rem;
+	font-family: "Poppins", system-ui, sans-serif;
+	font-size: 1.25rem;
 	font-weight: 300;
 	line-height: 1;
-	color: rgba(255, 255, 255, 0.35);
+	color: rgba(201, 149, 108, 0.65);
 	margin-top: 0.05rem;
 	user-select: none;
 }
 
 @media (min-width: 640px) {
 	.flip-colon {
-		height: var(--flip-h, 3.35rem);
-		font-size: 1.6rem;
-		padding: 0 0.15rem;
+		font-size: 1.5rem;
 	}
 }
 

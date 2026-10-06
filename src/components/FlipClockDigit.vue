@@ -142,7 +142,7 @@ watch(
 	line-height: 1;
 	color: var(--flip-digit);
 	font-variant-numeric: tabular-nums;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+	text-shadow: 0 1px 3px rgba(40, 8, 20, 0.45);
 }
 
 .flip-card-face-top .flip-card-number,
