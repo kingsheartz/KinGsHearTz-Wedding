@@ -2,11 +2,15 @@
 import { computed } from "vue"
 import FlipClockDigit from "./FlipClockDigit.vue"
 
-const props = defineProps<{
-	value: string
-	label: string
-	minDigits?: number
-}>()
+const props = withDefaults(
+	defineProps<{
+		value: string
+		label: string
+		minDigits?: number
+		variant?: "day" | "time"
+	}>(),
+	{ variant: "time" },
+)
 
 const digits = computed(() => {
 	const min = props.minDigits ?? 2
@@ -16,7 +20,7 @@ const digits = computed(() => {
 </script>
 
 <template>
-	<div class="flip-group">
+	<div class="flip-group" :class="`flip-group--${variant}`">
 		<div class="flip-group-digits">
 			<FlipClockDigit v-for="(d, i) in digits" :key="`${label}-${i}`" :value="d" />
 		</div>
@@ -35,25 +39,26 @@ const digits = computed(() => {
 .flip-group-digits {
 	display: flex;
 	align-items: center;
-	gap: 0.35rem;
+	gap: 0.4rem;
 }
 
 .flip-group-label {
-	margin-top: 0.5rem;
+	margin-top: 0.65rem;
 	font-family: "Poppins", system-ui, sans-serif;
-	font-size: 0.625rem;
+	font-size: 0.5625rem;
 	font-weight: 500;
-	letter-spacing: 0.2em;
+	letter-spacing: 0.28em;
 	text-transform: uppercase;
-	color: rgba(107, 16, 40, 0.72);
+	color: rgba(255, 255, 255, 0.42);
 	text-align: center;
 	width: 100%;
-	padding-left: 0.2em;
 }
 
 @media (min-width: 640px) {
 	.flip-group-label {
-		font-size: 0.6875rem;
+		margin-top: 0.75rem;
+		font-size: 0.625rem;
+		letter-spacing: 0.32em;
 	}
 }
 </style>

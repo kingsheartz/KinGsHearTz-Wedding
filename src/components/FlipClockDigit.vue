@@ -44,7 +44,7 @@ watch(
 </script>
 
 <template>
-	<div class="flip-card flip-card-themed" :class="{ flipping: isFlipping }">
+	<div class="flip-card" :class="{ flipping: isFlipping }">
 		<div class="flip-card-inner">
 			<div class="flip-card-face flip-card-face-top">
 				<span class="flip-card-number">{{ topStatic }}</span>
@@ -142,6 +142,7 @@ watch(
 	line-height: 1;
 	color: var(--flip-digit);
 	font-variant-numeric: tabular-nums;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .flip-card-face-top .flip-card-number,
