@@ -1,5 +1,5 @@
 <template>
-	<section id="rsvp-section" class="py-24 sm:py-28 text-center bg-gradient-to-b from-rose-50 via-white to-rose-50/80 border-t border-rose-100">
+	<section id="rsvp" class="py-24 sm:py-28 text-center bg-gradient-to-b from-rose-50 via-white to-rose-50/80 border-t border-rose-100">
 		<div class="max-w-4xl mx-auto px-4 sm:px-6">
 			<SectionHeading
 				eyebrow="We’d love to celebrate with you"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, nextTick } from "vue"
 import AOS from "aos"
+import { useHashNavigation } from "../composables/useHashNavigation"
 
 import SiteHeader from "../components/SiteHeader.vue"
 import ScrollProgressBar from "../components/ScrollProgressBar.vue"
@@ -17,6 +18,8 @@ import GoogleMapVenue from "../components/GoogleMapVenue.vue"
 import BackgroundMusic from "../components/BackgroundMusic.vue"
 import SiteFooter from "../components/SiteFooter.vue"
 import FloatingInviteFab from "../components/FloatingInviteFab.vue"
+
+useHashNavigation(() => true)
 
 onMounted(async () => {
 	await nextTick()

@@ -8,6 +8,7 @@ import InvitationEnvelopeDark from "./components/InvitationEnvelopeDark.vue"
 import AdminRSVPList from "./components/AdminRSVPList.vue"
 import InvitationTemplate from "./components/InvitationTemplate.vue"
 import { showAdminRSVP, showInvitation, rsvpData } from "./state"
+import { resolveSectionId, scrollToHashWhenReady } from "./composables/useHashNavigation"
 
 const showIntro = ref(true)
 
@@ -19,6 +20,9 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e)
 
 function onEnter() {
 	showIntro.value = false
+	if (window.location.hash) {
+		scrollToHashWhenReady(window.location.hash, "smooth")
+	}
 }
 
 onMounted(() => {
@@ -38,6 +42,9 @@ onMounted(() => {
 			// Bypass intro envelope and show the custom invitation pass
 			showIntro.value = false
 			showInvitation.value = true
+		} else if (resolveSectionId(window.location.hash)) {
+			// Deep link e.g. /#rsvp — skip intro and scroll once Home is mounted
+			showIntro.value = false
 		}
 	} catch (e) {
 		console.error('Failed to parse URL invitation parameters:', e)

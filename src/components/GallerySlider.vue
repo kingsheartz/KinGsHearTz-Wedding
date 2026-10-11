@@ -80,11 +80,18 @@ onUnmounted(() => {
 			<p class="gal-subtitle">
 				A few moments from our journey together —<br class="hidden sm:inline" /> from quiet smiles to shared laughter.
 			</p>
+			<p class="gal-swipe-hint" aria-hidden="true">Swipe to explore</p>
 		</div>
 
-		<!-- Grid -->
-		<div class="gal-grid">
-			<div v-for="(photo, idx) in photos" :key="idx" class="gal-card" @click="openLightbox(idx)">
+		<!-- Grid / mobile filmstrip -->
+		<div class="gal-grid" role="list">
+			<div
+				v-for="(photo, idx) in photos"
+				:key="idx"
+				class="gal-card"
+				role="listitem"
+				@click="openLightbox(idx)"
+			>
 				<!-- Skeleton shimmer while loading -->
 				<div v-if="!imgLoaded[idx]" class="gal-skeleton" />
 
@@ -174,9 +181,15 @@ onUnmounted(() => {
    SECTION
 ───────────────────────────────────────── */
 .gal-section {
-	padding: 96px 0 104px;
+	padding: 64px 0 72px;
 	background: linear-gradient(180deg, #fff7f7 0%, #ffffff 40%, #fffaf8 100%);
 	overflow: hidden;
+}
+
+@media (min-width: 640px) {
+	.gal-section {
+		padding: 96px 0 104px;
+	}
 }
 
 /* ─────────────────────────────────────────
@@ -185,8 +198,14 @@ onUnmounted(() => {
 .gal-header {
 	text-align: center;
 	max-width: 560px;
-	margin: 0 auto 56px;
+	margin: 0 auto 28px;
 	padding: 0 24px;
+}
+
+@media (min-width: 640px) {
+	.gal-header {
+		margin-bottom: 56px;
+	}
 }
 
 .gal-header-ornament {
@@ -228,22 +247,51 @@ onUnmounted(() => {
 	letter-spacing: 0.01em;
 }
 
+.gal-swipe-hint {
+	display: block;
+	margin-top: 12px;
+	font-family: "Cinzel", serif;
+	font-size: 9px;
+	letter-spacing: 0.32em;
+	text-transform: uppercase;
+	color: rgba(139, 38, 53, 0.45);
+}
+
+@media (min-width: 640px) {
+	.gal-swipe-hint {
+		display: none;
+	}
+}
+
 /* ─────────────────────────────────────────
    GRID
 ───────────────────────────────────────── */
 .gal-grid {
-	display: grid;
-	grid-template-columns: repeat(1, 1fr);
-	gap: 20px;
+	display: flex;
+	gap: 14px;
 	max-width: 1100px;
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 4px 20px 12px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scroll-snap-type: x mandatory;
+	scroll-padding-inline: 20px;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+}
+
+.gal-grid::-webkit-scrollbar {
+	display: none;
 }
 
 @media (min-width: 640px) {
 	.gal-grid {
+		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 22px;
+		overflow: visible;
+		padding: 0 20px;
+		scroll-snap-type: none;
 	}
 }
 
@@ -259,7 +307,9 @@ onUnmounted(() => {
 ───────────────────────────────────────── */
 .gal-card {
 	position: relative;
-	aspect-ratio: 3 / 4;
+	flex: 0 0 min(82vw, 300px);
+	aspect-ratio: 4 / 5;
+	scroll-snap-align: center;
 	border-radius: 20px;
 	overflow: hidden;
 	cursor: pointer;
@@ -269,6 +319,14 @@ onUnmounted(() => {
 		0 2px 8px rgba(0, 0, 0, 0.06);
 	transition: transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.45s ease;
 	will-change: transform;
+}
+
+@media (min-width: 640px) {
+	.gal-card {
+		flex: unset;
+		aspect-ratio: 3 / 4;
+		scroll-snap-align: unset;
+	}
 }
 
 .gal-card:hover {

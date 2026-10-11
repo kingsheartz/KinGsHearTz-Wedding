@@ -3,13 +3,16 @@ import { ref } from "vue"
 import { showAdminRSVP } from "../state"
 import { useScrollSpy } from "../composables/useScrollSpy"
 import { useRafScroll } from "../composables/useRafScroll"
+import { scrollToSection } from "../composables/useHashNavigation"
 
 const navItems = [
 	{ id: "story", label: "Story" },
 	{ id: "video", label: "Video" },
 	{ id: "gallery", label: "Gallery" },
 	{ id: "events", label: "Events", mdOnly: true },
-	{ id: "rsvp-section", label: "RSVP" },
+	{ id: "venue-map", label: "Venue", mdOnly: true },
+	{ id: "countdown", label: "Countdown", mdOnly: true },
+	{ id: "rsvp", label: "RSVP" },
 ]
 
 const { activeId } = useScrollSpy(navItems.map((n) => n.id))
@@ -17,7 +20,7 @@ const { activeId } = useScrollSpy(navItems.map((n) => n.id))
 const scrolled = ref(false)
 
 const scrollTo = (id: string) => {
-	document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+	scrollToSection(id, "smooth")
 }
 
 useRafScroll(() => {

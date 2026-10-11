@@ -22,7 +22,7 @@ const onPause = () => {
 				Save the Date
 			</h2>
 			<p class="text-gray-600 mb-10 mx-auto" data-aos="fade-up" data-aos-delay="80">
-				Save the date for our wedding!
+				Hold the date for our wedding!
 			</p>
 
 			<div

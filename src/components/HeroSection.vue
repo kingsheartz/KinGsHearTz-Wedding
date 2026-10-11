@@ -1,16 +1,96 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue"
 import { showInvitation } from "../state"
+import { scrollToSection } from "../composables/useHashNavigation"
 import heroPhoto from "../assets/photos/4.jpg"
 
 const scrollToCountdown = () => {
-	document.getElementById("countdown")?.scrollIntoView({ behavior: "smooth" })
+	scrollToSection("countdown", "smooth")
 }
 
 const parallaxY = ref(0)
 const pointerX = ref(0)
 const pointerY = ref(0)
 const photoReady = ref(false)
+
+const KICKER = "The Wedding Of"
+const NAMES = "Govind & Krishnendu"
+const INVITE =
+	"Together with our families, we joyfully invite you to celebrate the beginning of our forever."
+
+const kickerText = ref("")
+const namesText = ref("")
+const inviteText = ref("")
+const writePhase = ref<"idle" | "kicker" | "names" | "invite" | "done">("idle")
+const showActions = ref(false)
+
+let typewriterTimers: number[] = []
+let heroWritingStarted = false
+
+function onPhotoReady() {
+	photoReady.value = true
+	if (heroWritingStarted) return
+	heroWritingStarted = true
+	startHeroWriting()
+}
+
+function clearTypewriter() {
+	typewriterTimers.forEach((id) => window.clearTimeout(id))
+	typewriterTimers = []
+}
+
+function typeLine(
+	target: { value: string },
+	full: string,
+	charMs: number,
+	onDone?: () => void,
+	initialDelay = 0,
+) {
+	const startId = window.setTimeout(() => {
+		let index = 0
+		const tick = () => {
+			index += 1
+			target.value = full.slice(0, index)
+			if (index < full.length) {
+				typewriterTimers.push(window.setTimeout(tick, charMs))
+			} else {
+				onDone?.()
+			}
+		}
+		tick()
+	}, initialDelay)
+	typewriterTimers.push(startId)
+}
+
+function startHeroWriting() {
+	clearTypewriter()
+	kickerText.value = ""
+	namesText.value = ""
+	inviteText.value = ""
+	showActions.value = false
+
+	const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+	if (reduced) {
+		kickerText.value = KICKER
+		namesText.value = NAMES
+		inviteText.value = INVITE
+		writePhase.value = "done"
+		showActions.value = true
+		return
+	}
+
+	writePhase.value = "kicker"
+	typeLine(kickerText, KICKER, 52, () => {
+		writePhase.value = "names"
+		typeLine(namesText, NAMES, 58, () => {
+			writePhase.value = "invite"
+			typeLine(inviteText, INVITE, 26, () => {
+				writePhase.value = "done"
+				showActions.value = true
+			}, 220)
+		}, 280)
+	}, 500)
+}
 
 const onScroll = () => {
 	parallaxY.value = Math.min(window.scrollY * 0.35, 180)
@@ -27,11 +107,9 @@ onMounted(() => {
 	const img = new Image()
 	img.src = heroPhoto
 	if (img.complete) {
-		photoReady.value = true
+		onPhotoReady()
 	} else {
-		img.onload = () => {
-			photoReady.value = true
-		}
+		img.onload = onPhotoReady
 	}
 
 	window.addEventListener("scroll", onScroll, { passive: true })
@@ -39,6 +117,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+	clearTypewriter()
 	window.removeEventListener("scroll", onScroll)
 	window.removeEventListener("mousemove", onMove)
 })
@@ -46,6 +125,7 @@ onBeforeUnmount(() => {
 
 <template>
 	<section
+		id="hero"
 		class="hero relative min-h-[100svh] flex flex-col items-center justify-center text-center overflow-hidden bg-[#1a1014]"
 	>
 		<div
@@ -62,7 +142,7 @@ onBeforeUnmount(() => {
 				loading="eager"
 				fetchpriority="high"
 				decoding="async"
-				@load="photoReady = true"
+				@load="onPhotoReady"
 			/>
 		</div>
 
@@ -75,21 +155,41 @@ onBeforeUnmount(() => {
 			class="relative z-10 px-4 sm:px-6 pt-24 pb-28 max-w-3xl transition-transform duration-300 ease-out"
 			:style="{ transform: `translate3d(${pointerX * -0.3}px, ${pointerY * -0.3}px, 0)` }"
 		>
-			<p class="uppercase tracking-[0.3em] text-xs sm:text-sm text-rose-200/80 mb-4 animate-fade-slow">
-				The Wedding Of
+			<p class="hero-write hero-write-kicker uppercase tracking-[0.3em] text-xs sm:text-sm text-rose-200/80 mb-4">
+				<span class="hero-write-text">{{ kickerText }}</span>
+				<span
+					v-if="writePhase === 'kicker'"
+					class="hero-write-cursor"
+					aria-hidden="true"
+				/>
 			</p>
 
-			<h1 class="font-hero text-[clamp(2.5rem,8vw,4.5rem)] leading-[1.05] text-white drop-shadow-2xl animate-fade-up">
-				<span class="inline-block">Govind</span>
-				<span class="mx-2 sm:mx-3 text-rose-300 font-light">&amp;</span>
-				<span class="inline-block">Krishnendu</span>
+			<h1
+				class="hero-write hero-write-title font-hero text-[clamp(2.5rem,8vw,4.5rem)] leading-[1.05] text-white drop-shadow-2xl"
+			>
+				<span class="hero-write-text">{{ namesText }}</span>
+				<span
+					v-if="writePhase === 'names'"
+					class="hero-write-cursor hero-write-cursor--light"
+					aria-hidden="true"
+				/>
 			</h1>
 
-			<p class="mt-6 text-base sm:text-lg text-rose-50/90 mx-auto max-w-xl leading-relaxed animate-fade-up delay-150">
-				Together with our families, we joyfully invite you to celebrate the beginning of our forever.
+			<p
+				class="hero-write hero-write-invite mt-6 text-base sm:text-lg text-rose-50/90 mx-auto max-w-xl leading-relaxed min-h-[4.5rem] sm:min-h-[3.25rem]"
+			>
+				<span class="hero-write-text">{{ inviteText }}</span>
+				<span
+					v-if="writePhase === 'invite'"
+					class="hero-write-cursor hero-write-cursor--light"
+					aria-hidden="true"
+				/>
 			</p>
 
-			<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up delay-300">
+			<div
+				class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700"
+				:class="showActions ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none'"
+			>
 				<button
 					type="button"
 					class="btn-glow px-8 py-3.5 rounded-full bg-rose-500 text-white text-sm sm:text-base font-medium"
@@ -133,33 +233,44 @@ onBeforeUnmount(() => {
 	}
 }
 
-@keyframes fade-up {
-	from {
-		opacity: 0;
-		transform: translateY(28px);
-	}
-	to {
+.hero-write {
+	min-height: 1.2em;
+}
+
+.hero-write-kicker {
+	min-height: 1.5em;
+}
+
+.hero-write-title {
+	min-height: 1.15em;
+}
+
+.hero-write-text {
+	white-space: pre-wrap;
+}
+
+.hero-write-cursor {
+	display: inline-block;
+	width: 2px;
+	height: 0.85em;
+	margin-left: 2px;
+	vertical-align: -0.08em;
+	background: rgba(251, 207, 232, 0.95);
+	animation: hero-cursor-blink 0.85s step-end infinite;
+}
+
+.hero-write-cursor--light {
+	background: rgba(255, 255, 255, 0.92);
+}
+
+@keyframes hero-cursor-blink {
+	0%,
+	100% {
 		opacity: 1;
-		transform: translateY(0);
 	}
-}
-
-.animate-fade-up {
-	animation: fade-up 1s ease forwards;
-	opacity: 0;
-}
-
-.animate-fade-slow {
-	animation: fade-up 1.3s ease forwards;
-	opacity: 0;
-}
-
-.delay-150 {
-	animation-delay: 0.15s;
-}
-
-.delay-300 {
-	animation-delay: 0.3s;
+	50% {
+		opacity: 0;
+	}
 }
 
 @keyframes bounce-soft {
@@ -179,8 +290,7 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
 	.ken-burns,
 	.animate-bounce-soft,
-	.animate-fade-up,
-	.animate-fade-slow {
+	.hero-write-cursor {
 		animation: none !important;
 		opacity: 1;
 	}

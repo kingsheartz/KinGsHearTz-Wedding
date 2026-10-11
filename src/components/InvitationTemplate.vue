@@ -6,6 +6,7 @@ import {
 	CALENDAR_UTC_START,
 	formatIcsUtcStamp,
 } from '../constants/weddingDate'
+import { scrollToSection } from '../composables/useHashNavigation'
 
 // Generate personalized invite link
 const inviteUrl = computed(() => {
@@ -73,10 +74,7 @@ const handlePrint = () => {
 
 const handleScrollToRSVP = () => {
 	showInvitation.value = false
-	setTimeout(() => {
-		const el = document.getElementById('rsvp-section')
-		if (el) el.scrollIntoView({ behavior: 'smooth' })
-	}, 300)
+	setTimeout(() => scrollToSection("rsvp", "smooth"), 300)
 }
 
 const handleClose = () => {
